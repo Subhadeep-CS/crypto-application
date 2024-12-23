@@ -4,6 +4,22 @@ export default {
   content: ["./index.html", "./src/**/*.{ts,tsx,js,jsx}"],
   theme: {
     extend: {
+      padding: {
+        "1/2": "50%",
+        "3/4": "75%",
+        "1/3": "33.333333%",
+        "2/3": "66.666667%",
+      },
+      container: {
+        padding: {
+          DEFAULT: "1rem",
+          sm: "1rem",
+          md: "1.5rem",
+          lg: "2rem",
+          xl: "3rem",
+        },
+        width: "100%",
+      },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",

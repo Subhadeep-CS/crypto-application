@@ -5,7 +5,7 @@ import {
   MarketCapPercentageData,
 } from "./module";
 import { Button } from "../components/ui/button";
-import { Settings,User } from "lucide-react";
+import { Settings, User } from "lucide-react";
 
 const TopHeader: React.FC<TopHeaderPropsData> = ({ topHeaderData }) => {
   const [marketDominanceData, setMarketDominanceData] =
@@ -28,7 +28,7 @@ const TopHeader: React.FC<TopHeaderPropsData> = ({ topHeaderData }) => {
     }));
   }, [market_cap_percentage]);
   return (
-    <div className="w-full flex justify-evenly items-center bg-white/80 backdrop-blur-lg border-b">
+    <div className="container flex justify-between items-center bg-white/80 backdrop-blur-lg">
       <div id="crypto-topheader" className="flex gap-3 mx-4 my-2">
         <div className="text-title-xxxxsm">
           <p>
@@ -64,10 +64,14 @@ const TopHeader: React.FC<TopHeaderPropsData> = ({ topHeaderData }) => {
       </div>
       <div id="logindata" className="flex gap-4 p-2">
         <div id="settings-button">
-            <Button variant={"secondary"}><Settings/></Button>
+          <Button variant={"secondary"}>
+            <Settings />
+          </Button>
         </div>
         <div id="login-button">
-            <Button variant={"secondary"}><User /></Button>
+          <Button variant={"secondary"}>
+            <User />
+          </Button>
         </div>
       </div>
     </div>
