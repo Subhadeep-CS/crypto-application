@@ -6,6 +6,8 @@ import {
 } from "../../../components/ui/card";
 import { TrendingComponentProps } from "./module";
 import { CircleChevronRight } from "lucide-react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCaretUp, faCaretDown } from "@fortawesome/free-solid-svg-icons";
 
 const TrendingComponent: React.FC<TrendingComponentProps> = ({
   trendingCoinData,
@@ -13,7 +15,7 @@ const TrendingComponent: React.FC<TrendingComponentProps> = ({
   console.log(trendingCoinData);
   return (
     <>
-      <Card>
+      <Card className="w-[350px]">
         <CardHeader>
           <CardTitle>
             <div className="flex justify-between items-center">
@@ -35,7 +37,7 @@ const TrendingComponent: React.FC<TrendingComponentProps> = ({
                   <img
                     src={coinData?.item?.thumb}
                     alt={coinData?.item?.id}
-                    className="h-6 w-6"
+                    className="h-6 w-6 rounded-full"
                   />
                 </div>
                 <div className="text-title-xxxxsm">{coinData?.item?.name}</div>
@@ -47,11 +49,28 @@ const TrendingComponent: React.FC<TrendingComponentProps> = ({
                     coinData?.item?.data?.price_change_percentage_24h["usd"] > 0
                       ? "text-green-600"
                       : "text-red-600"
-                  }`}
+                  } flex justify-center items-center gap-1`}
                 >
-                  {coinData?.item?.data?.price_change_percentage_24h[
-                    "usd"
-                  ].toFixed(2)}
+                  <div>
+                    {coinData?.item?.data?.price_change_percentage_24h["usd"] >
+                    0 ? (
+                      <FontAwesomeIcon
+                        icon={faCaretUp}
+                        style={{ color: "#00ff00" }}
+                      />
+                    ) : (
+                      <FontAwesomeIcon
+                        icon={faCaretDown}
+                        style={{ color: "#ff0000" }}
+                      />
+                    )}
+                  </div>
+                  <div>
+                    {Math.abs(
+                      coinData?.item?.data?.price_change_percentage_24h["usd"]
+                    ).toFixed(2)}{" "}
+                    %
+                  </div>
                 </div>
               </div>
             </div>

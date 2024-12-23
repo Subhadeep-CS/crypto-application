@@ -11,17 +11,18 @@ import TopHeader from "./TopHeader";
 import { HEADER_MENU } from "../utils/constant";
 import { useQuery } from "@tanstack/react-query";
 import { fetchGlobalCoinData } from "../services/api";
+
 const Header: React.FC = () => {
-  const {data:topHeaderData,isLoading}=useQuery({
-    queryKey:['globalCoinData'],
+  const { data: topHeaderData, isLoading } = useQuery({
+    queryKey: ["globalCoinData"],
     queryFn: fetchGlobalCoinData,
-});
-  if(isLoading){
+  });
+  if (isLoading) {
     return;
   }
   return (
     <>
-      <TopHeader topHeaderData={topHeaderData.data}/>
+      <TopHeader topHeaderData={topHeaderData.data} />
       <div className="w-full flex justify-between items-center bg-white/80 backdrop-blur-lg border-b">
         <nav className="container flex justify-between items-center">
           <Link to={"/"} className="flex justify-center items-center">

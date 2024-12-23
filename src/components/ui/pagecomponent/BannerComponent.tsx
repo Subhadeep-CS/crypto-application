@@ -1,6 +1,8 @@
 import TrendingComponent from "./TrendingComponent";
 import { useQuery } from "@tanstack/react-query";
 import { fetchTrendingCoinData } from "../../../services/api";
+import TopGainerComponent from "./TopGainerComponent";
+import TotalMarketCapData from "./TotalMarketCapData";
 
 const BannerComponent: React.FC = () => {
   const { data: trendingCoinData, isLoading } = useQuery({
@@ -21,12 +23,16 @@ const BannerComponent: React.FC = () => {
           The global cryptocurrency market cap today is $30 trillion
         </p>
       </div>
-      <div className="flex gap-2">
-        <div></div>
-        <div>
-          <TrendingComponent trendingCoinData={trendingCoinData?.coins} />
-        </div>
-        <div></div>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        {/* Empty space or placeholder for future content */}
+        <TotalMarketCapData />
+
+        {/* Trending Component */}
+
+        <TrendingComponent trendingCoinData={trendingCoinData?.coins} />
+
+        {/* Top Gainer Component */}
+        <TopGainerComponent topGainerCoinData={trendingCoinData?.nfts} />
       </div>
     </div>
   );
