@@ -1,4 +1,4 @@
-import { useGlobalMarketStore } from "../../../zustand/store";
+import { useGlobalMarketStore } from "../../zustand/store";
 import TotalMarketVolumeCardComponent from "./TotalMarketVolumeCardComponent";
 
 const TotalMarketCapData: React.FC = () => {

@@ -1,9 +1,4 @@
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "../../../components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import { CircleChevronRight } from "lucide-react";
 import { TopGainerComponentProps } from "./module";
 
@@ -11,7 +6,7 @@ const TopGainerComponent: React.FC<TopGainerComponentProps> = ({
   topGainerCoinData,
 }) => {
   return (
-    <Card>
+    <Card className="shadow-md bg-white rounded-lg">
       <CardHeader>
         <CardTitle>
           <div className="flex justify-between items-center">

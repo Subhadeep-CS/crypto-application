@@ -1,9 +1,4 @@
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "../../../components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import { TrendingComponentProps } from "./module";
 import { CircleChevronRight } from "lucide-react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -12,10 +7,9 @@ import { faCaretUp, faCaretDown } from "@fortawesome/free-solid-svg-icons";
 const TrendingComponent: React.FC<TrendingComponentProps> = ({
   trendingCoinData,
 }) => {
-  console.log(trendingCoinData);
   return (
     <>
-      <Card>
+      <Card className="shadow-md bg-white rounded-lg">
         <CardHeader>
           <CardTitle>
             <div className="flex justify-between items-center">

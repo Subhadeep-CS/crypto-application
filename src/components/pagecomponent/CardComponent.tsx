@@ -5,7 +5,7 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "../card";
+} from "../ui/card";
 
 const CardComponent: React.FC = () => {
   return (

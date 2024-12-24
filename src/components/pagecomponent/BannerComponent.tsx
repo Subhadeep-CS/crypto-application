@@ -1,8 +1,9 @@
 import TrendingComponent from "./TrendingComponent";
 import { useQuery } from "@tanstack/react-query";
-import { fetchTrendingCoinData } from "../../../services/api";
+import { fetchTrendingCoinData } from "../../services/api";
 import TopGainerComponent from "./TopGainerComponent";
 import TotalMarketCapData from "./TotalMarketCapData";
+import { useGlobalMarketStore } from "../../zustand/store";
 
 const BannerComponent: React.FC = () => {
   const { data: trendingCoinData, isLoading } = useQuery({
@@ -10,6 +11,9 @@ const BannerComponent: React.FC = () => {
     queryFn: fetchTrendingCoinData,
   });
 
+  const globalMarketData = useGlobalMarketStore(
+    (state) => state.globalMarketData
+  );
   if (isLoading) {
     return;
   }
@@ -19,8 +23,10 @@ const BannerComponent: React.FC = () => {
         <h2 className="font-semibold text-3xl">
           Cryptocurrency Prices By Market Cap
         </h2>
-        <p className="text-title-md">
-          The global cryptocurrency market cap today is $30 trillion
+        <p className="text-title-sm">
+          The global cryptocurrency market cap today is $ $
+          {(globalMarketData.total_market_cap / 1e12).toFixed(2)} Trillion,a
+          0.0% change in the last 24 hours
         </p>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-2">

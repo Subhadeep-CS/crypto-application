@@ -1,4 +1,4 @@
-import BannerComponent from "../../components/ui/pagecomponent/BannerComponent";
+import BannerComponent from "../../components/pagecomponent/BannerComponent";
 
 const Home: React.FC = () => {
   return <BannerComponent />;
