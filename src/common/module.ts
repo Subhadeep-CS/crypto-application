@@ -7,9 +7,9 @@ type TopHeaderData={
     markets:number,
     market_cap_percentage:MarketCapPercentageData,
 }
-export type MarketDominanceData={
-    firstCoin: number | undefined,
-    secondCoin: number | undefined,
+export interface MarketDominanceData{
+    coinName: string | undefined,
+    coinData: number | undefined,
 }
 export interface TopHeaderPropsData{
     topHeaderData: TopHeaderData,

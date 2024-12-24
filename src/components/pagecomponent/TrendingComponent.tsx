@@ -3,6 +3,7 @@ import { TrendingComponentProps } from "./module";
 import { CircleChevronRight } from "lucide-react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretUp, faCaretDown } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
 
 const TrendingComponent: React.FC<TrendingComponentProps> = ({
   trendingCoinData,
@@ -14,9 +15,11 @@ const TrendingComponent: React.FC<TrendingComponentProps> = ({
           <CardTitle>
             <div className="flex justify-between items-center">
               <div>🔥Trending</div>
-              <div className="flex justify-center items-center gap-2">
-                View More <CircleChevronRight />
-              </div>
+              <Link to="trending-currencies">
+                <div className="flex justify-center items-center gap-2 hover:text-green-500 cursor-pointer">
+                  View More <CircleChevronRight />
+                </div>
+              </Link>
             </div>
           </CardTitle>
         </CardHeader>

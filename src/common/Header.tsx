@@ -33,6 +33,7 @@ const Header: React.FC = () => {
         total_trading_volume: topHeaderData.data.total_volume["usd"],
         market_cap_change_percentage_24h_usd:
           topHeaderData.data.market_cap_change_percentage_24h_usd,
+        total_crypto_currencies: topHeaderData.data.active_cryptocurrencies,
       };
       setGlobalMarketData({ ...globalCoinDataObject });
     }

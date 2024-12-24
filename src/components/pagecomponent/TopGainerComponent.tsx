@@ -11,7 +11,7 @@ const TopGainerComponent: React.FC<TopGainerComponentProps> = ({
         <CardTitle>
           <div className="flex justify-between items-center">
             <div>🚀 Top NFTS</div>
-            <div className="flex justify-center items-center gap-2">
+            <div className="flex justify-center items-center gap-2 hover:text-green-500 cursor-pointer">
               View More <CircleChevronRight />
             </div>
           </div>
