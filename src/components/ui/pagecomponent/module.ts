@@ -39,3 +39,8 @@ type CoinItem = {
     topGainerCoinData: GainerCoinItem[];
   }
   
+  export interface TotalMarketVolumeCardComponentProps{
+    cardTitle:number;
+    cardDescription:string;
+    cardDataChange?:number | null;
+  }

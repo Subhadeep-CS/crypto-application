@@ -28,7 +28,7 @@ const TopHeader: React.FC<TopHeaderPropsData> = ({ topHeaderData }) => {
     }));
   }, [market_cap_percentage]);
   return (
-    <div className="container flex justify-between items-center bg-white/80 backdrop-blur-lg">
+    <div className="container-all flex justify-between items-center bg-white/80 backdrop-blur-lg">
       <div id="crypto-topheader" className="flex gap-3 mx-4 my-2">
         <div className="text-title-xxxxsm">
           <p>

@@ -15,7 +15,7 @@ const TrendingComponent: React.FC<TrendingComponentProps> = ({
   console.log(trendingCoinData);
   return (
     <>
-      <Card className="w-[350px]">
+      <Card>
         <CardHeader>
           <CardTitle>
             <div className="flex justify-between items-center">
@@ -33,7 +33,7 @@ const TrendingComponent: React.FC<TrendingComponentProps> = ({
               className="flex justify-between items-center gap-4"
             >
               <div className="flex justify-center items-center gap-2">
-                <div className="mx-2 p-2">
+                <div className="my-2">
                   <img
                     src={coinData?.item?.thumb}
                     alt={coinData?.item?.id}

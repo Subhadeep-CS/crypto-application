@@ -29,11 +29,11 @@ const TopGainerComponent: React.FC<TopGainerComponentProps> = ({
             className="flex justify-between items-center gap-4"
           >
             <div className="flex justify-center items-center gap-2">
-              <div className="mx-2 p-2">
+              <div className="my-2">
                 <img
                   src={coinData?.thumb}
                   alt={coinData?.id}
-                  className="h-6 w-6"
+                  className="h-6 w-6 rounded-full"
                 />
               </div>
               <div className="text-title-xxxxsm">{coinData?.name}</div>

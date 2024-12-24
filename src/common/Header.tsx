@@ -11,12 +11,33 @@ import TopHeader from "./TopHeader";
 import { HEADER_MENU } from "../utils/constant";
 import { useQuery } from "@tanstack/react-query";
 import { fetchGlobalCoinData } from "../services/api";
+import { useEffect } from "react";
+import { useGlobalMarketStore } from "../zustand/store";
 
 const Header: React.FC = () => {
-  const { data: topHeaderData, isLoading } = useQuery({
+  const {
+    data: topHeaderData,
+    isLoading,
+    status,
+  } = useQuery({
     queryKey: ["globalCoinData"],
     queryFn: fetchGlobalCoinData,
   });
+  const setGlobalMarketData = useGlobalMarketStore(
+    (state) => state.setGlobalMarketData
+  );
+  useEffect(() => {
+    if (status === "success") {
+      const globalCoinDataObject = {
+        total_market_cap: topHeaderData.data.total_market_cap["usd"],
+        total_trading_volume: topHeaderData.data.total_volume["usd"],
+        market_cap_change_percentage_24h_usd:
+          topHeaderData.data.market_cap_change_percentage_24h_usd,
+      };
+      setGlobalMarketData({ ...globalCoinDataObject });
+    }
+  }, [status, topHeaderData]);
+
   if (isLoading) {
     return;
   }
@@ -26,7 +47,7 @@ const Header: React.FC = () => {
         <TopHeader topHeaderData={topHeaderData.data} />
       </div>
       <div className="border-b">
-        <div className="container flex justify-between items-center bg-white/80 backdrop-blur-lg">
+        <div className="container-all flex justify-between items-center bg-white/80 backdrop-blur-lg">
           <nav className="flex justify-between items-center">
             <Link to={"/"} className="flex justify-center items-center">
               <div className="p-2">
