@@ -64,6 +64,6 @@
     @apply bg-background text-foreground flex flex-col;
   }
   .container-all {
-    @apply container px-4 py-2 mx-auto; /* px for left/right, py for top/bottom */
+    @apply container px-16 py-2 mx-auto;
   }
 }
