@@ -61,3 +61,7 @@ type CoinItem = {
   export interface CoinMarketDataTableProps{
     allCoinList:SingleCoinData[]
   }
+
+  export interface CustomiseDropdownComponent{
+    dropdownTrigger:string;
+  }

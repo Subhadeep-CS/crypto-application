@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { GlobalMarketData,GlobalMarketDominance } from "./module";
+import { GlobalCategoryData, GlobalMarketData,GlobalMarketDominance } from "./module";
 
 export const useGlobalMarketStore = create<{
     globalMarketData:GlobalMarketData,
@@ -16,4 +16,12 @@ export const useGlobalMarketDominance= create<{
 }>((set)=>({
   globalMarketDominance:[{coinName:'',coinData:0}],
   setGlobalMarketDominance: (data)=> set(()=>({globalMarketDominance:data}))
+}))
+
+export const useGlobalCategoryData=create<{
+  globalCategoryData:GlobalCategoryData[],
+  setGlobalCategoryData:(data:GlobalCategoryData[])=>void
+}>((set)=>({
+  globalCategoryData:[],
+  setGlobalCategoryData: (data)=> set(()=>({globalCategoryData:data}))
 }))

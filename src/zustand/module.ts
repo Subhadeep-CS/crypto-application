@@ -9,3 +9,8 @@ export interface GlobalMarketDominance {
   coinName: string | undefined,
   coinData: number | undefined,
 }
+
+export interface GlobalCategoryData{
+  id:number,
+  name:string,
+}

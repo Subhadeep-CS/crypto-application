@@ -1,0 +1,51 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useGlobalCategoryData } from "../../zustand/store";
+import {
+  NavigationMenu,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  navigationMenuTriggerStyle,
+} from "../ui/navigation-menu";
+import { faListOl, faRankingStar } from "@fortawesome/free-solid-svg-icons";
+const CoinMarketCategoryNavBar: React.FC = () => {
+  const globalCategoryData = useGlobalCategoryData(
+    (state) => state.globalCategoryData
+  );
+
+  return (
+    <NavigationMenu>
+      <NavigationMenuList className="text-muted-foreground">
+        <NavigationMenuItem>
+          <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+            <div className="flex justify-center gap-2 py-2">
+              <FontAwesomeIcon icon={faRankingStar} className="text-base" />
+              <span className="text-md font-bold">All Coins</span>
+            </div>
+          </NavigationMenuLink>
+        </NavigationMenuItem>
+        <NavigationMenuItem>
+          <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+            <div className="flex justify-center items-center py-2 gap-2">
+              <FontAwesomeIcon icon={faListOl} className="text-base" />
+              <span className="text-md font-bold">Highlights</span>
+            </div>
+          </NavigationMenuLink>
+        </NavigationMenuItem>
+        {globalCategoryData.length > 0 && (
+          <>
+            {globalCategoryData.slice(3).map((categoryData) => (
+              <NavigationMenuItem key={categoryData.id}>
+                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                  🔥 {categoryData.name}
+                </NavigationMenuLink>
+              </NavigationMenuItem>
+            ))}
+          </>
+        )}
+      </NavigationMenuList>
+    </NavigationMenu>
+  );
+};
+
+export default CoinMarketCategoryNavBar;

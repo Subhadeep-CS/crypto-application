@@ -1,10 +1,11 @@
 import TrendingComponent from "./TrendingComponent";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { fetchTrendingCoinData } from "../../services/api";
 import TopGainerComponent from "./TopGainerComponent";
 import TotalMarketCapData from "./TotalMarketCapData";
 import {
+  useGlobalCategoryData,
   useGlobalMarketDominance,
   useGlobalMarketStore,
 } from "../../zustand/store";
@@ -12,7 +13,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretDown, faCaretUp } from "@fortawesome/free-solid-svg-icons";
 
 const BannerComponent: React.FC = () => {
-  const { data: trendingCoinData, isLoading } = useQuery({
+  const {
+    data: trendingCoinData,
+    isLoading,
+    isSuccess,
+  } = useQuery({
     queryKey: ["TrendingData"],
     queryFn: fetchTrendingCoinData,
   });
@@ -23,10 +28,24 @@ const BannerComponent: React.FC = () => {
     (state) => state.globalMarketDominance
   );
 
+  const setGlobalCategoryData = useGlobalCategoryData(
+    (state) => state.setGlobalCategoryData
+  );
+
   const [readMore, setReadMore] = useState<boolean>(false);
   const handleReadMoreClick = () => {
     setReadMore((prevReadMore) => !prevReadMore);
   };
+
+  useEffect(() => {
+    if (isSuccess) {
+      const categoryData = trendingCoinData?.categories;
+      if (categoryData) {
+        setGlobalCategoryData(categoryData);
+      }
+    }
+  }, [isSuccess]);
+
   if (isLoading) {
     return;
   }
