@@ -1,6 +1,8 @@
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import { CircleChevronRight } from "lucide-react";
 import { TopGainerComponentProps } from "./module";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCaretDown, faCaretUp } from "@fortawesome/free-solid-svg-icons";
 
 const TopGainerComponent: React.FC<TopGainerComponentProps> = ({
   topGainerCoinData,
@@ -38,13 +40,24 @@ const TopGainerComponent: React.FC<TopGainerComponentProps> = ({
               <div
                 className={`${
                   coinData?.data?.floor_price_in_usd_24h_percentage_change > 0
-                    ? "text-green-600"
-                    : "text-red-600"
+                    ? "text-green-500"
+                    : "text-red-500"
                 }`}
               >
-                {Number(
-                  coinData?.data?.floor_price_in_usd_24h_percentage_change
-                ).toFixed(2)}
+                <span className="mx-2">
+                  {coinData?.data?.floor_price_in_usd_24h_percentage_change <
+                  0 ? (
+                    <FontAwesomeIcon icon={faCaretDown} color="#ff0000" />
+                  ) : (
+                    <FontAwesomeIcon icon={faCaretUp} color="#00ff00" />
+                  )}
+                </span>
+                <span>
+                  {Number(
+                    coinData?.data?.floor_price_in_usd_24h_percentage_change
+                  ).toFixed(2)}
+                  %
+                </span>
               </div>
             </div>
           </div>
