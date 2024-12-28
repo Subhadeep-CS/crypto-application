@@ -11,6 +11,8 @@ import {
 } from "../../zustand/store";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretDown, faCaretUp } from "@fortawesome/free-solid-svg-icons";
+import SwitchComponent from "./SwitchComponent";
+import { Label } from "../ui/label";
 
 const BannerComponent: React.FC = () => {
   const {
@@ -33,8 +35,17 @@ const BannerComponent: React.FC = () => {
   );
 
   const [readMore, setReadMore] = useState<boolean>(false);
+  const [highlights, setHighlights] = useState<boolean>(true);
   const handleReadMoreClick = () => {
     setReadMore((prevReadMore) => !prevReadMore);
+  };
+
+  const handleHighlightChange = (id: string, checked: boolean) => {
+    console.log(id);
+    console.log(checked);
+    if (id === "highlights") {
+      setHighlights(checked);
+    }
   };
 
   useEffect(() => {
@@ -50,40 +61,58 @@ const BannerComponent: React.FC = () => {
     return;
   }
   return (
-    <div className="container-all flex flex-col justify-center gap-8">
+    <div className="flex flex-col justify-center gap-8">
       <div className="flex flex-col gap-1.5">
-        <h2 className="font-semibold text-xl">
-          Cryptocurrency Prices By Market Cap
-        </h2>
-        <p className="text-sm text-muted-foreground">
-          The global cryptocurrency market cap today is $ $
-          {(globalMarketData.total_market_cap / 1e12).toFixed(2)} Trillion,a
-          <span
-            className={`${
-              globalMarketData.market_cap_change_percentage_24h_usd < 0
-                ? "text-red-500"
-                : "text-green-500"
-            } mx-2`}
-          >
-            {globalMarketData.market_cap_change_percentage_24h_usd < 0 ? (
-              <FontAwesomeIcon icon={faCaretDown} />
-            ) : (
-              <FontAwesomeIcon icon={faCaretUp} />
-            )}{" "}
-            {globalMarketData.market_cap_change_percentage_24h_usd.toFixed(2)}%
-          </span>
-          change in the last 24 hours.{" "}
-          <span
-            className={`underline text-md cursor-pointer font-bold ${
-              readMore
-                ? "text-green-500 hover:text-black"
-                : "text-black hover:text-green-500"
-            }`}
-            onClick={handleReadMoreClick}
-          >
-            {readMore ? "Hide" : "Read More"}
-          </span>
-        </p>
+        <div className="mt-10 flex justify-between">
+          <div>
+            <h2 className="font-semibold text-xl">
+              Cryptocurrency Prices By Market Cap
+            </h2>
+            <p className="text-sm text-muted-foreground">
+              The global cryptocurrency market cap today is $ $
+              {(globalMarketData.total_market_cap / 1e12).toFixed(2)} Trillion,
+              a
+              <span
+                className={`${
+                  globalMarketData.market_cap_change_percentage_24h_usd < 0
+                    ? "text-red-500"
+                    : "text-green-500"
+                } mx-2`}
+              >
+                {globalMarketData.market_cap_change_percentage_24h_usd < 0 ? (
+                  <FontAwesomeIcon icon={faCaretDown} />
+                ) : (
+                  <FontAwesomeIcon icon={faCaretUp} />
+                )}{" "}
+                {globalMarketData.market_cap_change_percentage_24h_usd.toFixed(
+                  2
+                )}
+                %
+              </span>
+              change in the last 24 hours.{" "}
+              <span
+                className={`underline text-md cursor-pointer font-bold ${
+                  readMore
+                    ? "text-green-500 hover:text-black"
+                    : "text-black hover:text-green-500"
+                }`}
+                onClick={handleReadMoreClick}
+              >
+                {readMore ? "Hide" : "Read More"}
+              </span>
+            </p>
+          </div>
+          <div>
+            <Label htmlFor="highlights" className="mr-2">
+              Highlights
+            </Label>
+            <SwitchComponent
+              id="highlights"
+              checked={highlights}
+              onChangeChecked={handleHighlightChange}
+            />
+          </div>
+        </div>
         <div
           className={`transition-all duration-500 ease-in-out ${
             readMore
@@ -117,11 +146,13 @@ const BannerComponent: React.FC = () => {
           )}
         </div>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
-        <TotalMarketCapData />
-        <TrendingComponent trendingCoinData={trendingCoinData?.coins} />
-        <TopGainerComponent topGainerCoinData={trendingCoinData?.nfts} />
-      </div>
+      {highlights && (
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
+          <TotalMarketCapData />
+          <TrendingComponent trendingCoinData={trendingCoinData?.coins} />
+          <TopGainerComponent topGainerCoinData={trendingCoinData?.nfts} />
+        </div>
+      )}
     </div>
   );
 };

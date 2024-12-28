@@ -7,12 +7,13 @@ import {
   TableCell,
 } from "../ui/table";
 import { COINS_TABLE_HEADER } from "../../utils/constant";
-import { CoinMarketDataTableProps } from "./module";
+import { CoinMarketDataTableProps, CustomiseDropdownChange } from "./module";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretDown, faCaretUp } from "@fortawesome/free-solid-svg-icons";
 import { faStar } from "@fortawesome/free-regular-svg-icons";
 const CoinMarketDataTable: React.FC<CoinMarketDataTableProps> = ({
   allCoinList,
+  dropdownChange,
 }) => {
   return (
     <>
@@ -20,14 +21,22 @@ const CoinMarketDataTable: React.FC<CoinMarketDataTableProps> = ({
         <TableHeader className="border-t">
           <TableRow>
             <TableHead></TableHead>
-            {COINS_TABLE_HEADER.map((coinTableHeader, index) => (
-              <TableHead
-                key={index}
-                className="text-xs text-center font-bold  text-black"
-              >
-                {coinTableHeader}
-              </TableHead>
-            ))}
+            {COINS_TABLE_HEADER.map((coinTableHeader, index) => {
+              const shouldRenderHeader =
+                !["30d", "FDV", "Market Cap/FDV"].includes(coinTableHeader) ||
+                dropdownChange[
+                  coinTableHeader as keyof CustomiseDropdownChange
+                ];
+
+              return shouldRenderHeader ? (
+                <TableHead
+                  key={`${coinTableHeader}-${index}`}
+                  className="text-xs text-center font-bold text-black"
+                >
+                  {coinTableHeader}
+                </TableHead>
+              ) : null;
+            })}
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -46,10 +55,10 @@ const CoinMarketDataTable: React.FC<CoinMarketDataTableProps> = ({
                     alt={coinData.name}
                     className="rounded-full h-6 w-6"
                   />
-                  <span className="text-black font-semibold text-wrap">
-                    {coinData.name.toLocaleUpperCase()}{" "}
-                    <span className="text-muted-foreground">
-                      {coinData.symbol.toLocaleUpperCase()}
+                  <span className="text-black font-semibold text-wrap text-uppercase">
+                    {coinData.name}{" "}
+                    <span className="text-muted-foreground text-uppercase">
+                      {coinData.symbol}
                     </span>
                   </span>
                 </div>
@@ -138,48 +147,63 @@ const CoinMarketDataTable: React.FC<CoinMarketDataTableProps> = ({
                   </>
                 )}
               </TableCell>
-              <TableCell
-                className={`${
-                  coinData?.price_change_percentage_7d_in_currency
-                    ? coinData?.price_change_percentage_7d_in_currency < 0
-                      ? "text-red-500"
-                      : "text-green-500"
-                    : ""
-                } text-center`}
-              >
-                {coinData.price_change_percentage_30d_in_currency && (
-                  <>
-                    <span className="mx-2">
-                      {coinData?.price_change_percentage_30d_in_currency < 0 ? (
-                        <FontAwesomeIcon icon={faCaretDown} />
-                      ) : (
-                        <FontAwesomeIcon icon={faCaretUp} />
+              {dropdownChange["30d"] && (
+                <>
+                  <TableCell
+                    className={`${
+                      coinData?.price_change_percentage_7d_in_currency
+                        ? coinData?.price_change_percentage_7d_in_currency < 0
+                          ? "text-red-500"
+                          : "text-green-500"
+                        : ""
+                    } text-center`}
+                  >
+                    <>
+                      {coinData.price_change_percentage_30d_in_currency && (
+                        <>
+                          <span className="mx-2">
+                            {coinData?.price_change_percentage_30d_in_currency <
+                            0 ? (
+                              <FontAwesomeIcon icon={faCaretDown} />
+                            ) : (
+                              <FontAwesomeIcon icon={faCaretUp} />
+                            )}
+                          </span>
+                          <span>
+                            {Math.abs(
+                              coinData.price_change_percentage_30d_in_currency
+                            ).toFixed(3)}
+                            %
+                          </span>
+                        </>
                       )}
-                    </span>
-                    <span>
-                      {Math.abs(
-                        coinData.price_change_percentage_30d_in_currency
-                      ).toFixed(3)}
-                      %
-                    </span>
-                  </>
-                )}
-              </TableCell>
+                    </>
+                  </TableCell>
+                </>
+              )}
               <TableCell className="text-black text-center">
                 ${coinData.total_volume}
               </TableCell>
               <TableCell className="text-black text-center">
                 ${coinData.market_cap}
               </TableCell>
-              <TableCell className="text-black text-center">
-                ${coinData.fully_diluted_valuation}
-              </TableCell>
-              <TableCell className="text-black text-center">
-                $
-                {(
-                  coinData.market_cap / coinData.fully_diluted_valuation
-                ).toFixed(2)}
-              </TableCell>
+              {dropdownChange.FDV && (
+                <>
+                  <TableCell className="text-black text-center">
+                    ${coinData.fully_diluted_valuation}
+                  </TableCell>
+                </>
+              )}
+              {dropdownChange["Market Cap/FDV"] && (
+                <>
+                  <TableCell className="text-black text-center">
+                    $
+                    {(
+                      coinData.market_cap / coinData.fully_diluted_valuation
+                    ).toFixed(2)}
+                  </TableCell>
+                </>
+              )}
             </TableRow>
           ))}
         </TableBody>

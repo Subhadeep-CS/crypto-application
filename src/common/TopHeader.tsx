@@ -43,7 +43,7 @@ const TopHeader: React.FC<TopHeaderPropsData> = ({ topHeaderData }) => {
     setMarketDominanceData([...newState]);
   }, [market_cap_percentage]);
   return (
-    <div className="container-all flex justify-between items-center bg-white/80 backdrop-blur-lg">
+    <div className="flex justify-between items-center bg-white/80 backdrop-blur-lg">
       <div id="crypto-topheader" className="flex gap-3 mx-4 my-2">
         <div className="text-sm">
           <p className="text-muted-foreground">

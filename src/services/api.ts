@@ -1,3 +1,5 @@
+import { CoinListQueryKey } from "./module";
+
 // api/fetchGlobalCoin.ts
 export const fetchGlobalCoinData = async () => {
     const response = await fetch(`${import.meta.env.VITE_BASE_URL}/global`, {
@@ -31,9 +33,9 @@ export const fetchGlobalCoinData = async () => {
     return response.json();
   }
 
-  export const fetchAllCoinList=async({queryKey})=>{
-    const [, { vs_currency }] = queryKey;
-    const response=await fetch(`${import.meta.env.VITE_BASE_URL}/coins/markets?vs_currency=${vs_currency}&price_change_percentage=1h,24h,7d,30d&sparkline=true`,{
+  export const fetchAllCoinList=async({queryKey}:CoinListQueryKey)=>{
+    const [, { vs_currency,per_page }] = queryKey;
+    const response=await fetch(`${import.meta.env.VITE_BASE_URL}/coins/markets?vs_currency=${vs_currency}&price_change_percentage=1h,24h,7d,30d&sparkline=true&per_page=${per_page}`,{
       headers:{
         'Content-Type':'application/json',
         "x-cg-demo-api-key": import.meta.env.VITE_API_KEY,

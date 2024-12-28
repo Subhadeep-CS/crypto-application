@@ -4,11 +4,11 @@ import AppRouter from "./routes/AppRouter";
 
 function App() {
   return (
-    <>
+    <div className="w-full">
       <Layout>
         <AppRouter />
       </Layout>
-    </>
+    </div>
   );
 }
 

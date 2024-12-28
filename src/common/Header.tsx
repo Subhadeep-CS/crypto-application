@@ -48,7 +48,7 @@ const Header: React.FC = () => {
         <TopHeader topHeaderData={topHeaderData.data} />
       </div>
       <div className="border-b">
-        <div className="container-all flex justify-between items-center bg-white/80 backdrop-blur-lg">
+        <div className="flex justify-between items-center bg-white/80 backdrop-blur-lg">
           <nav className="flex justify-between items-center">
             <Link to={"/"} className="flex justify-center items-center">
               <div className="p-2">

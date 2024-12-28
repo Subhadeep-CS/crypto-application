@@ -8,8 +8,25 @@ import { Separator } from "../ui/separator";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faWandMagicSparkles } from "@fortawesome/free-solid-svg-icons";
 import { DropdownMenuItem } from "../ui/dropdown-menu";
-import { Switch } from "../ui/switch";
-const CustomiseDropdownComponent: React.FC = () => {
+import SwitchComponent from "./SwitchComponent";
+import { CustomiseFilterProps } from "./module";
+import { Tabs, TabsList, TabsTrigger } from "../ui/tabs";
+import { useCoinListData } from "../../zustand/store";
+
+const CustomiseDropdownComponent: React.FC<CustomiseFilterProps> = ({
+  dropdownChange,
+  setDropdownChange,
+}) => {
+  const coinListPerPagedata = useCoinListData((state) => state.coinListPerPage);
+  const setCoinListPerPage = useCoinListData(
+    (state) => state.setCoinListPerPage
+  );
+  const handleChange = (name: string, checked: boolean) => {
+    setDropdownChange((prevDropdownChange) => ({
+      ...prevDropdownChange,
+      [name]: checked,
+    }));
+  };
   return (
     <>
       <DropdownMenu>
@@ -30,11 +47,15 @@ const CustomiseDropdownComponent: React.FC = () => {
             </div>
             <div className="flex justify-between items-center w-full">
               <p className="text-black font-bold">30d</p>
-              <Switch />
+              <SwitchComponent
+                checked={dropdownChange["30d"]}
+                id="30d"
+                onChangeChecked={handleChange}
+              />
             </div>
           </DropdownMenuItem>
           <DropdownMenuItem
-            className="flex flex-col gap-2"
+            className="flex flex-col gap-4"
             onSelect={(e) => e.preventDefault()}
           >
             <div className="w-full flex items-center">
@@ -43,11 +64,19 @@ const CustomiseDropdownComponent: React.FC = () => {
             </div>
             <div className="flex justify-between items-center w-full">
               <p className="text-black font-bold">FDV</p>
-              <Switch />
+              <SwitchComponent
+                checked={dropdownChange.FDV}
+                id="FDV"
+                onChangeChecked={handleChange}
+              />
             </div>
             <div className="flex justify-between items-center w-full">
               <p className="text-black font-bold">Market Cap/FDV</p>
-              <Switch className="cursor-pointern transition-all" />
+              <SwitchComponent
+                checked={dropdownChange["Market Cap/FDV"]}
+                id="Market Cap/FDV"
+                onChangeChecked={handleChange}
+              />
             </div>
           </DropdownMenuItem>
           <DropdownMenuItem
@@ -60,7 +89,16 @@ const CustomiseDropdownComponent: React.FC = () => {
             </div>
             <div className="flex justify-between items-center w-full">
               <p className="text-black font-bold">Row</p>
-              <Switch />
+              <Tabs
+                value={coinListPerPagedata}
+                onValueChange={setCoinListPerPage}
+              >
+                <TabsList>
+                  <TabsTrigger value="50">50</TabsTrigger>
+                  <TabsTrigger value="100">100</TabsTrigger>
+                  <TabsTrigger value="300">300</TabsTrigger>
+                </TabsList>
+              </Tabs>
             </div>
           </DropdownMenuItem>
         </DropdownMenuContent>

@@ -61,9 +61,27 @@ type CoinItem = {
     market_cap:number
   }
   export interface CoinMarketDataTableProps{
-    allCoinList:SingleCoinData[]
+    allCoinList:SingleCoinData[],
+    dropdownChange:CustomiseDropdownChange,
   }
 
   export interface CustomiseDropdownComponent{
     dropdownTrigger:string;
+  }
+
+  export interface SwitchComponentProps{
+    checked:boolean,
+    id:string,
+    onChangeChecked:(id:string,checked:boolean)=>void,
+  }
+
+  export interface CustomiseDropdownChange{
+    "30d":boolean,
+    "FDV":boolean,
+    "Market Cap/FDV":boolean;
+  }
+
+  export interface CustomiseFilterProps{
+    dropdownChange:CustomiseDropdownChange,
+    setDropdownChange:React.Dispatch<React.SetStateAction<CustomiseDropdownChange>>
   }

@@ -1,11 +1,12 @@
 import Header from "../common/Header";
 import { LayoutProps } from "./module";
-
+import Footer from "../common/Footer";
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
-    <div className="container-fluid min-h-screen">
+    <div>
       <Header />
       <main>{children}</main>
+      <Footer />
     </div>
   );
 };

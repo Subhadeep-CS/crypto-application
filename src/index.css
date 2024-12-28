@@ -64,6 +64,6 @@
     @apply bg-background text-foreground flex flex-col;
   }
   .container-all {
-    @apply container px-16 py-2 mx-auto;
+    @apply container md:px-16 md:py-2 sm:px-4 sm:py-2;
   }
 }

@@ -25,3 +25,11 @@ export const useGlobalCategoryData=create<{
   globalCategoryData:[],
   setGlobalCategoryData: (data)=> set(()=>({globalCategoryData:data}))
 }))
+
+export const useCoinListData=create<{
+  coinListPerPage:string,
+  setCoinListPerPage:(data:string)=>void
+}>((set)=>({
+  coinListPerPage:"50",
+  setCoinListPerPage: (data)=>set(()=>({coinListPerPage:data}))
+}))
