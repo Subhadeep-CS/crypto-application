@@ -29,9 +29,9 @@ const CoinMarketDataComponent: React.FC = () => {
     return;
   }
   return (
-    <div className="flex flex-col gap-10 mt-3">
+    <div className="container-all flex flex-col gap-2">
       <div className="flex justify-between items-center">
-        <div className="w-4/5">
+        <div className="w-4/5 mt-8 mb-4">
           <CoinMarketCategoryNavBar />
         </div>
         <div className="w-1/5">

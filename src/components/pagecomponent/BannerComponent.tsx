@@ -61,7 +61,7 @@ const BannerComponent: React.FC = () => {
     return;
   }
   return (
-    <div className="flex flex-col justify-center gap-8">
+    <div className="container-all flex flex-col justify-center gap-8">
       <div className="flex flex-col gap-1.5">
         <div className="mt-10 flex justify-between">
           <div>
