@@ -11,10 +11,16 @@ import { CoinMarketDataTableProps, CustomiseDropdownChange } from "./module";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretDown, faCaretUp } from "@fortawesome/free-solid-svg-icons";
 import { faStar } from "@fortawesome/free-regular-svg-icons";
+import Sparkline from "../svg/SparklineComponent";
+import { useNavigate } from "react-router-dom";
 const CoinMarketDataTable: React.FC<CoinMarketDataTableProps> = ({
   allCoinList,
   dropdownChange,
 }) => {
+  const navigate = useNavigate();
+  const handleCoinDataClick = (coin_id: string) => {
+    navigate(`/coin-details/${coin_id}`);
+  };
   return (
     <>
       <Table>
@@ -41,7 +47,10 @@ const CoinMarketDataTable: React.FC<CoinMarketDataTableProps> = ({
         </TableHeader>
         <TableBody>
           {allCoinList.map((coinData) => (
-            <TableRow className="text-sm">
+            <TableRow
+              className="text-sm cursor-pointer"
+              onClick={() => handleCoinDataClick(coinData.id)}
+            >
               <TableCell className="text-center">
                 <FontAwesomeIcon icon={faStar} />
               </TableCell>
@@ -204,6 +213,19 @@ const CoinMarketDataTable: React.FC<CoinMarketDataTableProps> = ({
                   </TableCell>
                 </>
               )}
+              <TableCell>
+                <Sparkline
+                  data={coinData?.sparkline_in_7d.price}
+                  width={200}
+                  height={50}
+                  strokeColor={
+                    coinData?.price_change_percentage_7d_in_currency &&
+                    coinData?.price_change_percentage_7d_in_currency < 0
+                      ? "#ff0000"
+                      : "#00ff00"
+                  }
+                />
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>

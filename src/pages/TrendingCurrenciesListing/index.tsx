@@ -13,7 +13,7 @@ const TrendingCurrenciesListing: React.FC = () => {
   }
   return (
     <div className="container-all flex flex-col gap-8">
-      <div id="header-compnent">
+      <div id="header-compnent" className="mt-8">
         <h2 className="font-semibold text-xl text-black">
           Top Trending Cryptocurrencies Today
         </h2>

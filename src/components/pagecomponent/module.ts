@@ -57,8 +57,11 @@ type CoinItem = {
     price_change_percentage_7d_in_currency?:number;
     price_change_percentage_30d_in_currency?:number;
     fully_diluted_valuation:number
-    total_volume:number
-    market_cap:number
+    total_volume:number;
+    market_cap:number;
+    sparkline_in_7d:{
+      price:number[],
+    }
   }
   export interface CoinMarketDataTableProps{
     allCoinList:SingleCoinData[],

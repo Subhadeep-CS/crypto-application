@@ -1,4 +1,4 @@
-import { CoinListQueryKey } from "./module";
+import { CoinDetailsQueryKey, CoinListQueryKey } from "./module";
 
 // api/fetchGlobalCoin.ts
 export const fetchGlobalCoinData = async () => {
@@ -42,6 +42,22 @@ export const fetchGlobalCoinData = async () => {
       }
     })
     
+    if(!response.ok){
+      throw new Error(`Failed to fetch trending coins: ${response.statusText}`);
+    }
+
+    return response.json();
+  }
+
+  export const fetchCoinDetails=async({queryKey}:CoinDetailsQueryKey)=>{
+    const [,{coin_id}]=queryKey;
+    const response=await fetch(`${import.meta.env.VITE_BASE_URL}/coins/${coin_id}`,{
+      headers:{
+        'Content-Type':'application/json',
+        "x-cg-demo-api-key": import.meta.env.VITE_API_KEY,
+      }
+    });
+
     if(!response.ok){
       throw new Error(`Failed to fetch trending coins: ${response.statusText}`);
     }
