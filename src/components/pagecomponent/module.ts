@@ -88,3 +88,8 @@ type CoinItem = {
     dropdownChange:CustomiseDropdownChange,
     setDropdownChange:React.Dispatch<React.SetStateAction<CustomiseDropdownChange>>
   }
+
+  export interface HoverCardProps{
+    hoverTrigger:React.ReactNode | string;
+    hoverContext:string;
+  }

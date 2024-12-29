@@ -8,6 +8,7 @@ import {
   navigationMenuTriggerStyle,
 } from "../ui/navigation-menu";
 import { faListOl, faRankingStar } from "@fortawesome/free-solid-svg-icons";
+import { Separator } from "../ui/separator";
 const CoinMarketCategoryNavBar: React.FC = () => {
   const globalCategoryData = useGlobalCategoryData(
     (state) => state.globalCategoryData
@@ -32,6 +33,7 @@ const CoinMarketCategoryNavBar: React.FC = () => {
             </div>
           </NavigationMenuLink>
         </NavigationMenuItem>
+        <Separator orientation="vertical" />
         {globalCategoryData.length > 0 && (
           <>
             {globalCategoryData.slice(3).map((categoryData) => (
