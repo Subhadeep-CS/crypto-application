@@ -33,32 +33,30 @@ const TopGainerComponent: React.FC<TopGainerComponentProps> = ({
                   className="h-6 w-6 rounded-full"
                 />
               </div>
-              <div className="text-title-xxxxsm">{coinData?.name}</div>
+              <span className="text-sm">{coinData?.name}</span>
             </div>
-            <div className="flex justify-center items-center gap-4">
-              <div>{coinData?.data?.floor_price}</div>
-              <div
+            <div className="flex justify-center items-center gap-2">
+              <span className="text-sm">{coinData?.data?.floor_price}</span>
+              <span className="text-sm">
+                {coinData?.data?.floor_price_in_usd_24h_percentage_change <
+                0 ? (
+                  <FontAwesomeIcon icon={faCaretDown} color="#ff0000" />
+                ) : (
+                  <FontAwesomeIcon icon={faCaretUp} color="#00ff00" />
+                )}
+              </span>
+              <span
                 className={`${
                   coinData?.data?.floor_price_in_usd_24h_percentage_change > 0
                     ? "text-green-500"
                     : "text-red-500"
-                }`}
+                } text-sm`}
               >
-                <span className="mx-2">
-                  {coinData?.data?.floor_price_in_usd_24h_percentage_change <
-                  0 ? (
-                    <FontAwesomeIcon icon={faCaretDown} color="#ff0000" />
-                  ) : (
-                    <FontAwesomeIcon icon={faCaretUp} color="#00ff00" />
-                  )}
-                </span>
-                <span>
-                  {Number(
-                    coinData?.data?.floor_price_in_usd_24h_percentage_change
-                  ).toFixed(2)}
-                  %
-                </span>
-              </div>
+                {Number(
+                  coinData?.data?.floor_price_in_usd_24h_percentage_change
+                ).toFixed(2)}
+                %
+              </span>
             </div>
           </div>
         ))}

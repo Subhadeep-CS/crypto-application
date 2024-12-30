@@ -37,18 +37,14 @@ const TrendingComponent: React.FC<TrendingComponentProps> = ({
                     className="h-6 w-6 rounded-full"
                   />
                 </div>
-                <div className="text-title-xxxxsm">{coinData?.item?.name}</div>
+                <span className="text-sm">{coinData?.item?.name}</span>
               </div>
               <div className="flex justify-center items-center gap-4">
-                <div>${coinData?.item?.data?.price.toFixed(3)}</div>
-                <div
-                  className={`${
-                    coinData?.item?.data?.price_change_percentage_24h["usd"] > 0
-                      ? "text-green-600"
-                      : "text-red-600"
-                  } flex justify-center items-center gap-1`}
-                >
-                  <div>
+                <span className="text-sm">
+                  ${coinData?.item?.data?.price.toFixed(3)}
+                </span>
+                <div className={`flex justify-center items-center gap-1`}>
+                  <span>
                     {coinData?.item?.data?.price_change_percentage_24h["usd"] >
                     0 ? (
                       <FontAwesomeIcon
@@ -61,13 +57,20 @@ const TrendingComponent: React.FC<TrendingComponentProps> = ({
                         style={{ color: "#ff0000" }}
                       />
                     )}
-                  </div>
-                  <div>
+                  </span>
+                  <span
+                    className={`${
+                      coinData?.item?.data?.price_change_percentage_24h["usd"] >
+                      0
+                        ? "text-green-600"
+                        : "text-red-600"
+                    } text-sm`}
+                  >
                     {Math.abs(
                       coinData?.item?.data?.price_change_percentage_24h["usd"]
                     ).toFixed(2)}{" "}
                     %
-                  </div>
+                  </span>
                 </div>
               </div>
             </div>

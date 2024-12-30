@@ -44,7 +44,7 @@ const TopHeader: React.FC<TopHeaderPropsData> = ({ topHeaderData }) => {
   }, [market_cap_percentage]);
   return (
     <div className="container-all flex justify-between items-center bg-white/80 backdrop-blur-lg">
-      <div id="crypto-topheader" className="flex gap-3 mx-4 my-2">
+      <div id="crypto-topheader" className="flex gap-3 my-2 w-4/5">
         <div className="text-sm">
           <p className="text-muted-foreground">
             Coins:{" "}
@@ -110,7 +110,10 @@ const TopHeader: React.FC<TopHeaderPropsData> = ({ topHeaderData }) => {
           )}
         </div>
       </div>
-      <div id="logindata" className="flex gap-4 p-2">
+      <div
+        id="logindata"
+        className="flex justify-end items-center gap-4 p-2 w-1/5"
+      >
         <div id="settings-button">
           <Button variant={"secondary"}>
             <Settings />

@@ -43,7 +43,7 @@ const Header: React.FC = () => {
     return;
   }
   return (
-    <div className="grid">
+    <div className="w-full">
       <div className="border-b">
         <TopHeader topHeaderData={topHeaderData.data} />
       </div>
