@@ -13,16 +13,16 @@ const PaginationComponent: React.FC = () => {
     <Pagination>
       <PaginationContent>
         <PaginationItem>
-          <PaginationPrevious />
+          <PaginationPrevious href="#" />
         </PaginationItem>
         <PaginationItem>
-          <PaginationLink>1</PaginationLink>
+          <PaginationLink href="#">1</PaginationLink>
         </PaginationItem>
         <PaginationItem>
           <PaginationEllipsis />
         </PaginationItem>
         <PaginationItem>
-          <PaginationNext />
+          <PaginationNext href="#" />
         </PaginationItem>
       </PaginationContent>
     </Pagination>

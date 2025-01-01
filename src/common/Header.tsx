@@ -47,12 +47,12 @@ const Header: React.FC = () => {
       <div className="border-b">
         <TopHeader topHeaderData={topHeaderData.data} />
       </div>
-      <div className="border-b">
-        <div className="container-all flex justify-between items-center bg-white/80 backdrop-blur-lg">
+      <div className="container border-b">
+        <div className="mx-auto container bg-white/80 backdrop-blur-lg">
           <nav className="flex justify-between items-center">
             <Link to={"/"} className="flex justify-center items-center">
               <div className="p-2">
-                <img src={Logo} className="w-52 h-15" alt="website-logo" />
+                <img src={Logo} className="w-42 h-12" alt="website-logo" />
               </div>
               <div>
                 <NavigationMenu>

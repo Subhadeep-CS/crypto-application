@@ -6,7 +6,6 @@ import CoinMarketCategoryNavBar from "./CoinMarketCategoryNavBar";
 import CustomizeFilterComponent from "./CustomizeFilterComponent";
 import { CustomiseDropdownChange } from "./module";
 import { useCoinListData } from "../../zustand/store";
-import PaginationComponent from "./PaginationComponent";
 
 const CoinMarketDataComponent: React.FC = () => {
   const coinListPerPagedata = useCoinListData((state) => state.coinListPerPage);
@@ -46,9 +45,6 @@ const CoinMarketDataComponent: React.FC = () => {
           allCoinList={coinList}
           dropdownChange={dropdownChange}
         />
-      </div>
-      <div>
-        <PaginationComponent />
       </div>
     </div>
   );

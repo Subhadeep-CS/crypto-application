@@ -21,6 +21,7 @@ export default {
           lg: "2rem",
           xl: "3rem",
         },
+        center: true,
         width: "100%",
       },
       borderRadius: {

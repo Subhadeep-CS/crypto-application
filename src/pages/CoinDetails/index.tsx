@@ -31,7 +31,6 @@ import {
   SelectContent,
   SelectItem,
   SelectTrigger,
-  SelectValue,
 } from "../../components/ui/select";
 
 const CoinDetails: React.FC = () => {
@@ -128,12 +127,13 @@ const CoinDetails: React.FC = () => {
         </div>
         <div>
           <Progress
-            value={Math.min(
-              (coinDetailsData?.market_data.low_24h.usd /
-                coinDetailsData?.market_data.high_24h.usd) *
-                100,
+            value={
+              ((coinDetailsData?.market_data?.current_price?.usd -
+                coinDetailsData?.market_data.low_24h.usd) /
+                (coinDetailsData?.market_data.high_24h.usd -
+                  coinDetailsData?.market_data.low_24h.usd)) *
               100
-            )}
+            }
           />
           <div className="font-bold flex justify-between items-center">
             <span>${coinDetailsData?.market_data.low_24h.usd}</span>
@@ -258,9 +258,7 @@ const CoinDetails: React.FC = () => {
                           Mempool
                         </Button>
                         <Select>
-                          <SelectTrigger className="bg-secondary border-none outline-none focus:ring-0 focus:bg-secondary/80 rounded-l-none border border-l-2">
-                            <SelectValue />
-                          </SelectTrigger>
+                          <SelectTrigger className="bg-secondary border-none outline-none focus:ring-0 focus:bg-secondary/80 rounded-l-none border border-l-2"></SelectTrigger>
                           <SelectContent>
                             {coinDetailsData?.links?.blockchain_site.map(
                               (site: string, index: string) => (

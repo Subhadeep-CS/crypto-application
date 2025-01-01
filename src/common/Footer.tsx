@@ -1,8 +1,8 @@
 const Footer: React.FC = () => {
   return (
-    <>
-      <div className="container-all border-t-2">Hello Gecko</div>
-    </>
+    <div className="w-full border border-b">
+      <div className="container-all">Hello Gecko</div>
+    </div>
   );
 };
 
