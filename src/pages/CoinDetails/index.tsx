@@ -1,14 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
-import { fetchCoinDetails } from "../../services/api";
+import { fetchCoinChartData, fetchCoinDetails } from "../../services/api";
 import { Badge } from "../../components/ui/badge";
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbSeparator,
-} from "../../components/ui/breadcrumb";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretDown, faCaretUp } from "@fortawesome/free-solid-svg-icons";
 import { Calendar, Info } from "lucide-react";
@@ -32,6 +25,9 @@ import {
   SelectItem,
   SelectTrigger,
 } from "../../components/ui/select";
+import BreadCrumbComponent from "../../components/pagecomponent/BreadCrumbComponent";
+import CoinDetailsTable from "./CoinDetailsTable";
+import CoinChart from "./CoinChart";
 
 const CoinDetails: React.FC = () => {
   const { coin_id } = useParams<{ coin_id: string }>();
@@ -46,14 +42,7 @@ const CoinDetails: React.FC = () => {
     <div className="container-all flex">
       <div className="w-5/12 border-r pr-4" id="coin-details">
         <div className="my-2">
-          <Breadcrumb>
-            <BreadcrumbList>
-              <BreadcrumbItem>
-                <BreadcrumbLink href="#">Cryptocurencies</BreadcrumbLink>
-              </BreadcrumbItem>
-              <BreadcrumbSeparator />
-            </BreadcrumbList>
-          </Breadcrumb>
+          <BreadCrumbComponent />
         </div>
         <div
           id="coin-name-display"
@@ -151,62 +140,7 @@ const CoinDetails: React.FC = () => {
           </Button>
         </div>
         <div>
-          <Table className="text-muted-foreground">
-            <TableBody>
-              <TableRow>
-                <TableCell className="flex justify-between items-center">
-                  <TableCell>Market Cap</TableCell>
-                  <TableCell className="font-semibold text-black">
-                    $
-                    {coinDetailsData?.market_data?.market_cap[
-                      "usd"
-                    ]?.toLocaleString()}
-                  </TableCell>
-                </TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell className="flex justify-between items-center">
-                  <TableCell>Fully Diluted Valuation</TableCell>
-                  <TableCell className="font-semibold text-black">
-                    $
-                    {coinDetailsData?.market_data?.fully_diluted_valuation[
-                      "usd"
-                    ]?.toLocaleString()}
-                  </TableCell>
-                </TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell className="flex justify-between items-center">
-                  <TableCell>24h Trading Vol</TableCell>
-                  <TableCell className="font-semibold text-black"></TableCell>
-                </TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell className="flex justify-between items-center">
-                  <TableCell>Circulating Supply</TableCell>
-                  <TableCell className="font-semibold text-black">
-                    {coinDetailsData?.market_data?.circulating_supply?.toLocaleString()}
-                  </TableCell>
-                </TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell className="flex justify-between items-center">
-                  <TableCell>Total Supply</TableCell>
-                  <TableCell className="font-semibold text-black">
-                    {coinDetailsData?.market_data?.total_supply?.toLocaleString()}
-                  </TableCell>
-                </TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell className="flex justify-between items-center">
-                  <TableCell>Max Supply</TableCell>
-                  <TableCell className="font-semibold text-black">
-                    {coinDetailsData?.market_data?.max_supply?.toLocaleString()}
-                  </TableCell>
-                </TableCell>
-              </TableRow>
-            </TableBody>
-          </Table>
+          <CoinDetailsTable coinDetailsData={coinDetailsData} />
         </div>
         <div>
           <Table>
@@ -279,7 +213,6 @@ const CoinDetails: React.FC = () => {
         </div>
       </div>
       <div>
-        <div></div>
         <div
           id="naviogation-bar"
           className="flex justify-between items-center gap-2"
@@ -310,6 +243,9 @@ const CoinDetails: React.FC = () => {
               </TabsTrigger>
             </TabsList>
           </Tabs>
+        </div>
+        <div>
+          <CoinChart />
         </div>
       </div>
     </div>

@@ -64,3 +64,19 @@ export const fetchGlobalCoinData = async () => {
 
     return response.json();
   }
+
+  export const fetchCoinChartData=async({queryKey}:CoinDetailsQueryKey)=>{
+    const [,{coin_id}]=queryKey;
+    const response=await fetch(`${import.meta.env.VITE_BASE_URL}/coins/${coin_id}/market_chart?vs_currency=usd&days=1`,{
+      headers:{
+        'Content-Type':'application/json',
+        "x-cg-demo-api-key": import.meta.env.VITE_API_KEY,
+      }
+    })
+
+    if(!response.ok){
+      throw new Error(`Failed to fetch trending coins: ${response.statusText}`);
+    }
+
+    return response.json();
+  }
