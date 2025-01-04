@@ -65,6 +65,11 @@
   body {
     @apply bg-background text-foreground flex flex-col;
   }
+  @screen sm {
+    body {
+      font-size: 0.75rem !important; /* text-xs equivalent */
+    }
+  }
 }
 
 .container-all {

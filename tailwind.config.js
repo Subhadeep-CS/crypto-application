@@ -7,6 +7,9 @@ export default {
       fontFamily: {
         sans: ["Inter", "sans-serif"],
       },
+      screens: {
+        sm: "640px",
+      },
       padding: {
         "1/2": "50%",
         "3/4": "75%",

@@ -6,6 +6,15 @@ import CoinMarketCategoryNavBar from "./CoinMarketCategoryNavBar";
 import CustomizeFilterComponent from "./CustomizeFilterComponent";
 import { CustomiseDropdownChange } from "./module";
 import { useCoinListData } from "../../zustand/store";
+import PaginationComponent from "./PaginationComponent";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "../ui/select";
+import { Label } from "../ui/label";
 
 const CoinMarketDataComponent: React.FC = () => {
   const coinListPerPagedata = useCoinListData((state) => state.coinListPerPage);
@@ -28,23 +37,41 @@ const CoinMarketDataComponent: React.FC = () => {
     return;
   }
   return (
-    <div className="container-all flex flex-col gap-2">
-      <div className="flex justify-between items-center">
-        <div className="w-4/5 mt-8 mb-4">
-          <CoinMarketCategoryNavBar />
-        </div>
-        <div className="w-1/5">
-          <CustomizeFilterComponent
-            dropdownChange={dropdownChange}
-            setDropdownChange={setDropdownChange}
-          />
-        </div>
+    <div className="flex flex-col gap-2">
+      <div className="container-all flex justify-between items-center overflow-x-auto">
+        <CoinMarketCategoryNavBar />
+        <CustomizeFilterComponent
+          dropdownChange={dropdownChange}
+          setDropdownChange={setDropdownChange}
+        />
       </div>
       <div>
         <CoinMarketDataTable
           allCoinList={coinList}
           dropdownChange={dropdownChange}
         />
+        <div className="w-full flex justify-between items-center">
+          <p className="whitespace-nowrap text-sm">
+            Show 1 to 100 of 16,388 results
+          </p>
+          <PaginationComponent />
+          <Label
+            htmlFor="rows"
+            className=" bg-secondary border mr-2 border-none text-muted-foreground focus:ring-0 focus:bg-secondary/80"
+          >
+            Rows:{" "}
+          </Label>
+          <Select>
+            <SelectTrigger className="w-24 bg-secondary border mr-2 border-none focus:ring-0 focus:bg-secondary/80">
+              <SelectValue placeholder="50" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="50">50</SelectItem>
+              <SelectItem value="100">100</SelectItem>
+              <SelectItem value="300">300</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
       </div>
     </div>
   );

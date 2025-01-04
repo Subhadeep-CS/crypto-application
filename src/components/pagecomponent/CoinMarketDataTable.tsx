@@ -5,7 +5,6 @@ import {
   TableHead,
   TableBody,
   TableCell,
-  TableCaption,
 } from "../ui/table";
 import { COINS_TABLE_HEADER } from "../../utils/constant";
 import { CoinMarketDataTableProps, CustomiseDropdownChange } from "./module";
@@ -14,15 +13,6 @@ import { faCaretDown, faCaretUp } from "@fortawesome/free-solid-svg-icons";
 import { faStar } from "@fortawesome/free-regular-svg-icons";
 import Sparkline from "../svg/SparklineComponent";
 import { useNavigate } from "react-router-dom";
-import PaginationComponent from "./PaginationComponent";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "../ui/select";
-import { Label } from "../ui/label";
 
 const CoinMarketDataTable: React.FC<CoinMarketDataTableProps> = ({
   allCoinList,
@@ -35,30 +25,6 @@ const CoinMarketDataTable: React.FC<CoinMarketDataTableProps> = ({
   return (
     <>
       <Table>
-        <TableCaption>
-          <div className="w-full flex justify-between items-center">
-            <p className="whitespace-nowrap text-sm">
-              Show 1 to 100 of 16,388 results
-            </p>
-            <PaginationComponent />
-            <Label
-              htmlFor="rows"
-              className=" bg-secondary border mr-2 border-none text-muted-foreground focus:ring-0 focus:bg-secondary/80"
-            >
-              Rows:{" "}
-            </Label>
-            <Select>
-              <SelectTrigger className="w-24 bg-secondary border mr-2 border-none focus:ring-0 focus:bg-secondary/80">
-                <SelectValue placeholder="50" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="50">50</SelectItem>
-                <SelectItem value="100">100</SelectItem>
-                <SelectItem value="300">300</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
-        </TableCaption>
         <TableHeader className="border-t">
           <TableRow>
             <TableHead></TableHead>
