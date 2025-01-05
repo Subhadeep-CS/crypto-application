@@ -46,25 +46,25 @@ const TopHeader: React.FC<TopHeaderPropsData> = ({ topHeaderData }) => {
     <div className="container-all flex justify-between items-center bg-white/80 backdrop-blur-lg">
       <div className="flex gap-3 my-2 overflow-x-auto">
         <div className="text-sm whitespace-nowrap">
-          <p className="text-muted-foreground sm:text-xs">
+          <p className="text-muted-foreground text-xs sm:text-sm">
             Coins:{" "}
-            <span className="font-semibold text-black sm:text-xs">
+            <span className="font-semibold text-black text-xs sm:text-sm">
               {active_cryptocurrencies}
             </span>
           </p>
         </div>
         <div className="text-sm whitespace-nowrap">
-          <p className="text-muted-foreground sm:text-xs">
+          <p className="text-muted-foreground text-xs sm:text-sm">
             Exchanges:{" "}
-            <span className="font-semibold text-black sm:text-xs">
+            <span className="font-semibold text-black text-xs sm:text-sm">
               {markets}
             </span>
           </p>
         </div>
         <div className="text-sm whitespace-nowrap">
-          <p className="text-muted-foreground sm:text-xs">
+          <p className="text-muted-foreground text-xs sm:text-sm">
             Market Cap:{" "}
-            <span className="font-semibold text-black sm:text-xs">
+            <span className="font-semibold text-black text-xs sm:text-sm">
               ${(globalMarketData.total_market_cap / 1e12).toFixed(2)}T
             </span>
             <span
@@ -72,7 +72,7 @@ const TopHeader: React.FC<TopHeaderPropsData> = ({ topHeaderData }) => {
                 globalMarketData.market_cap_change_percentage_24h_usd < 0
                   ? "text-red-500"
                   : "text-green-500"
-              } mx-2 sm:text-xs`}
+              } mx-2 text-xs sm:text-sm`}
             >
               {globalMarketData.market_cap_change_percentage_24h_usd < 0 ? (
                 <FontAwesomeIcon icon={faCaretDown} />
@@ -85,23 +85,23 @@ const TopHeader: React.FC<TopHeaderPropsData> = ({ topHeaderData }) => {
           </p>
         </div>
         <div className="text-sm sm:text-xs whitespace-nowrap">
-          <p className="text-muted-foreground sm:text-xs">
+          <p className="text-muted-foreground text-xs sm:text-sm">
             24h Vol:{" "}
-            <span className="text-black font-semibold sm:text-xs">
+            <span className="text-black font-semibold text-xs sm:text-sm">
               ${(globalMarketData.total_trading_volume / 1e12).toFixed(2)}T
             </span>
           </p>
         </div>
         <div className="text-sm sm:text-xs whitespace-nowrap">
           {marketDominanceData.length !== 0 && (
-            <p className="text-muted-foreground sm:text-xs">
+            <p className="text-muted-foreground text-xs sm:text-sm">
               Dominance:{" "}
               {marketDominanceData.map((dominanceData, index) => (
                 <React.Fragment key={index}>
-                  <span className="font-semibold text-black sm:text-xs">
+                  <span className="font-semibold text-black text-xs sm:text-sm">
                     {dominanceData?.coinName?.toLocaleUpperCase()}
                   </span>{" "}
-                  <span className="font-semibold text-black sm:text-xs">
+                  <span className="font-semibold text-black text-xs sm:text-sm">
                     {dominanceData?.coinData?.toFixed(2)}%
                   </span>{" "}
                 </React.Fragment>

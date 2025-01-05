@@ -10,19 +10,19 @@ const TotalMarketVolumeCardComponent: React.FC<
 > = ({ cardTitle, cardDescription, cardDataChange = null }) => {
   return (
     <Card className="shadow-md bg-white rounded-lg">
-      <CardHeader className="flex flex-col sm:flex-row justify-between items-center">
+      <CardHeader className="flex flex-col sm:flex-row justify-between items-center text-xs sm:text-sm">
         <div className="flex-1">
-          <CardTitle className="text-lg font-bold text-gray-800 mb-2">
+          <CardTitle className="text-md sm:text-lg font-bold text-gray-800 mb-2">
             ${Math.round(cardTitle)}
           </CardTitle>
-          <CardDescription className="text-sm text-gray-600 flex items-center">
+          <CardDescription className="text-xs sm:text-sm text-gray-600 flex items-center">
             {cardDescription}{" "}
             {cardDataChange !== null && (
               <>
                 <span
                   className={`ml-2 ${
                     cardDataChange < 0 ? "text-red-500" : "text-green-500"
-                  } font-medium`}
+                  } font-medium text-xs sm:text-sm`}
                 >
                   {Math.abs(cardDataChange).toFixed(3)}%
                 </span>

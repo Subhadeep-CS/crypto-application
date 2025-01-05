@@ -37,40 +37,42 @@ const CoinMarketDataComponent: React.FC = () => {
     return;
   }
   return (
-    <div className="flex flex-col gap-2">
-      <div className="container-all flex justify-between items-center overflow-x-auto">
+    <div className="flex flex-col gap-2 my-4">
+      <div className="container-all flex justify-between items-center overflow-x-auto my-4">
         <CoinMarketCategoryNavBar />
         <CustomizeFilterComponent
           dropdownChange={dropdownChange}
           setDropdownChange={setDropdownChange}
         />
       </div>
-      <div>
+      <div className="container-all">
         <CoinMarketDataTable
           allCoinList={coinList}
           dropdownChange={dropdownChange}
         />
         <div className="w-full flex justify-between items-center">
-          <p className="whitespace-nowrap text-sm">
+          <p className="whitespace-nowrap text-xs hidden sm:visible">
             Show 1 to 100 of 16,388 results
           </p>
           <PaginationComponent />
-          <Label
-            htmlFor="rows"
-            className=" bg-secondary border mr-2 border-none text-muted-foreground focus:ring-0 focus:bg-secondary/80"
-          >
-            Rows:{" "}
-          </Label>
-          <Select>
-            <SelectTrigger className="w-24 bg-secondary border mr-2 border-none focus:ring-0 focus:bg-secondary/80">
-              <SelectValue placeholder="50" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="50">50</SelectItem>
-              <SelectItem value="100">100</SelectItem>
-              <SelectItem value="300">300</SelectItem>
-            </SelectContent>
-          </Select>
+          <div className="hidden sm:visible">
+            <Label
+              htmlFor="rows"
+              className=" bg-secondary border mr-2 border-none text-muted-foreground focus:ring-0 focus:bg-secondary/80"
+            >
+              Rows:{" "}
+            </Label>
+            <Select>
+              <SelectTrigger className="w-24 bg-secondary border mr-2 border-none focus:ring-0 focus:bg-secondary/80">
+                <SelectValue placeholder="50" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="50">50</SelectItem>
+                <SelectItem value="100">100</SelectItem>
+                <SelectItem value="300">300</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
         </div>
       </div>
     </div>

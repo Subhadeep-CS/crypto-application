@@ -63,7 +63,7 @@ const BannerComponent: React.FC = () => {
   return (
     <div className="container-all flex flex-col justify-center gap-8">
       <div className="flex flex-col gap-1.5">
-        <div className="mt-4 sm:mt-8 flex justify-between sm:flex flex-col gap-1">
+        <div className="mt-4 sm:mt-8 flex flex-col justify-between sm:flex sm:flex-row   gap-1">
           <div>
             <h2 className="font-semibold text-md sm:text-xl">
               Cryptocurrency Prices By Market Cap
@@ -77,7 +77,7 @@ const BannerComponent: React.FC = () => {
                   globalMarketData.market_cap_change_percentage_24h_usd < 0
                     ? "text-red-500"
                     : "text-green-500"
-                } mx-2`}
+                } mx-2 text-xs sm:text-sm`}
               >
                 {globalMarketData.market_cap_change_percentage_24h_usd < 0 ? (
                   <FontAwesomeIcon icon={faCaretDown} />
@@ -91,11 +91,11 @@ const BannerComponent: React.FC = () => {
               </span>
               change in the last 24 hours.{" "}
               <span
-                className={`underline text-md cursor-pointer font-bold text-xs sm:text-sm ${
+                className={`underline cursor-pointer font-bold ${
                   readMore
                     ? "text-green-500 hover:text-black"
                     : "text-black hover:text-green-500"
-                }`}
+                } text-xs sm:text-sm`}
                 onClick={handleReadMoreClick}
               >
                 {readMore ? "Hide" : "Read More"}
@@ -112,20 +112,20 @@ const BannerComponent: React.FC = () => {
             {readMore && (
               <p className="text-muted-foreground text-xs sm:text-sm">
                 Total cryptocurrency trading volume in the last day is at
-                <span className="mx-2 text-bold text-black">
+                <span className="mx-2 text-bold text-black text-xs sm:text-sm">
                   ${(globalMarketData.total_trading_volume / 1e9).toFixed(3)}{" "}
                   Billion.
                 </span>
                 Bitcoin dominance is at{" "}
-                <span className="text-bold text-black">
+                <span className="text-bold text-black text-xs sm:text-sm">
                   {globalMarketDominance[0]?.coinData?.toFixed(2)}%
                 </span>{" "}
                 and Ethereum dominance is at{" "}
-                <span className="text-bold text-black">
+                <span className="text-bold text-black text-xs sm:text-sm">
                   {globalMarketDominance[1]?.coinData?.toFixed(2)}%
                 </span>{" "}
                 . CoinFeko is now tracking{" "}
-                <span className="text-black font-bold">
+                <span className="text-black font-bold text-xs sm:text-sm">
                   {globalMarketData.total_crypto_currencies}
                 </span>{" "}
                 cryptocurrencies. The largest gainers in the industry right now
@@ -134,8 +134,8 @@ const BannerComponent: React.FC = () => {
               </p>
             )}
           </div>
-          <div>
-            <Label htmlFor="highlights" className="mr-2">
+          <div className="flex justify-start sm:justify-center items-center">
+            <Label htmlFor="highlights" className="mr-2 sm:text-base text-md">
               Highlights
             </Label>
             <SwitchComponent

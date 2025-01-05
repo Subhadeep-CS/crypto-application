@@ -54,7 +54,7 @@ const Header: React.FC = () => {
               <div className="py-2">
                 <img
                   src={Logo}
-                  className="w-32 h-10 sm:w-42 sm:h-12"
+                  className="w-32 h-10 sm:w-44 sm:h-14"
                   alt="website-logo"
                 />
               </div>
@@ -66,7 +66,7 @@ const Header: React.FC = () => {
                         <NavigationMenuItem key={index}>
                           <Link to="/docs">
                             <NavigationMenuLink
-                              className={navigationMenuTriggerStyle()}
+                              className={`${navigationMenuTriggerStyle()} text-xs sm:text-sm`}
                             >
                               {headerMenu}
                             </NavigationMenuLink>
