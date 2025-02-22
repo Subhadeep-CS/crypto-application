@@ -212,7 +212,7 @@ const CoinDetails: React.FC = () => {
           </Table>
         </div>
       </div>
-      <div>
+      <div className="w-7/12">
         <div
           id="naviogation-bar"
           className="flex justify-between items-center gap-2"

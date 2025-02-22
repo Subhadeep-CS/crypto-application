@@ -63,7 +63,7 @@ const BannerComponent: React.FC = () => {
   return (
     <div className="container-all flex flex-col justify-center gap-8">
       <div className="flex flex-col gap-1.5">
-        <div className="mt-4 sm:mt-8 flex flex-col justify-between sm:flex sm:flex-row   gap-1">
+        <div className="mt-4 sm:mt-8 flex justify-between gap-1">
           <div>
             <h2 className="font-semibold text-md sm:text-xl">
               Cryptocurrency Prices By Market Cap
@@ -101,38 +101,38 @@ const BannerComponent: React.FC = () => {
                 {readMore ? "Hide" : "Read More"}
               </span>
             </p>
-          </div>
-          <div
-            className={`transition-all duration-500 ease-in-out ${
-              readMore
-                ? "opacity-100 max-h-screen transform scale-100"
-                : "opacity-0 max-h-0 transform scale-95 overflow-hidden"
-            } my-2`}
-          >
-            {readMore && (
-              <p className="text-muted-foreground text-xs sm:text-sm">
-                Total cryptocurrency trading volume in the last day is at
-                <span className="mx-2 text-bold text-black text-xs sm:text-sm">
-                  ${(globalMarketData.total_trading_volume / 1e9).toFixed(3)}{" "}
-                  Billion.
-                </span>
-                Bitcoin dominance is at{" "}
-                <span className="text-bold text-black text-xs sm:text-sm">
-                  {globalMarketDominance[0]?.coinData?.toFixed(2)}%
-                </span>{" "}
-                and Ethereum dominance is at{" "}
-                <span className="text-bold text-black text-xs sm:text-sm">
-                  {globalMarketDominance[1]?.coinData?.toFixed(2)}%
-                </span>{" "}
-                . CoinFeko is now tracking{" "}
-                <span className="text-black font-bold text-xs sm:text-sm">
-                  {globalMarketData.total_crypto_currencies}
-                </span>{" "}
-                cryptocurrencies. The largest gainers in the industry right now
-                are XRP Ledger Ecosystem and Airdropped Tokens by NFT Projects
-                cryptocurrencies.
-              </p>
-            )}
+            <div
+              className={`transition-all duration-500 ease-in-out ${
+                readMore
+                  ? "opacity-100 max-h-screen transform scale-100"
+                  : "opacity-0 max-h-0 transform scale-95 overflow-hidden"
+              } my-2`}
+            >
+              {readMore && (
+                <p className="text-muted-foreground text-xs sm:text-sm">
+                  Total cryptocurrency trading volume in the last day is at
+                  <span className="mx-2 text-bold text-black text-xs sm:text-sm">
+                    ${(globalMarketData.total_trading_volume / 1e9).toFixed(3)}{" "}
+                    Billion.
+                  </span>
+                  Bitcoin dominance is at{" "}
+                  <span className="text-bold text-black text-xs sm:text-sm">
+                    {globalMarketDominance[0]?.coinData?.toFixed(2)}%
+                  </span>{" "}
+                  and Ethereum dominance is at{" "}
+                  <span className="text-bold text-black text-xs sm:text-sm">
+                    {globalMarketDominance[1]?.coinData?.toFixed(2)}%
+                  </span>{" "}
+                  . CoinFeko is now tracking{" "}
+                  <span className="text-black font-bold text-xs sm:text-sm">
+                    {globalMarketData.total_crypto_currencies}
+                  </span>{" "}
+                  cryptocurrencies. The largest gainers in the industry right
+                  now are XRP Ledger Ecosystem and Airdropped Tokens by NFT
+                  Projects cryptocurrencies.
+                </p>
+              )}
+            </div>
           </div>
           <div className="flex justify-start sm:justify-center items-center">
             <Label htmlFor="highlights" className="mr-2 sm:text-base text-md">

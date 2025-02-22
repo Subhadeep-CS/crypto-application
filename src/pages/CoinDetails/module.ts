@@ -13,3 +13,9 @@ export interface CoinDeatilsDataProps{
         }
     }
 }
+
+export type formattedData={
+    time:string,
+    detailedTime:string,
+    price:number,
+}
