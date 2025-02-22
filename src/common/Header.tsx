@@ -54,11 +54,11 @@ const Header: React.FC = () => {
               <div className="py-2">
                 <img
                   src={Logo}
-                  className="w-32 h-10 sm:w-44 sm:h-14"
+                  className="w-32 h-10 sm:w-32 sm:h-10"
                   alt="website-logo"
                 />
               </div>
-              <div>
+              <div className="px-2">
                 <NavigationMenu>
                   <NavigationMenuList>
                     {HEADER_MENU.map((headerMenu, index) => {

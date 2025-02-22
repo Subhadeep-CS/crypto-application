@@ -40,7 +40,7 @@ const CoinDetails: React.FC = () => {
   }
   return (
     <div className="container-all flex">
-      <div className="w-5/12 border-r pr-4" id="coin-details">
+      <div className="w-4/12 border-r pr-4" id="coin-details">
         <div className="my-2">
           <BreadCrumbComponent />
         </div>
@@ -212,7 +212,7 @@ const CoinDetails: React.FC = () => {
           </Table>
         </div>
       </div>
-      <div className="w-7/12">
+      <div className="w-8/12">
         <div
           id="naviogation-bar"
           className="flex justify-between items-center gap-2"

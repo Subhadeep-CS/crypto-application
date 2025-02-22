@@ -59,7 +59,11 @@ const CoinChart: React.FC = () => {
             </linearGradient>
           </defs>
           <XAxis dataKey="time" tick={{ fontSize: 12 }} />
-          <YAxis domain={["auto", "auto"]} tick={{ fontSize: 12 }} />
+          <YAxis
+            domain={["auto", "auto"]}
+            tick={{ fontSize: 12 }}
+            tickFormatter={(value) => `$ ${value}`}
+          />
           <CartesianGrid strokeDasharray="3 3" />
           <ChartTooltip
             content={({ active, payload }) => {

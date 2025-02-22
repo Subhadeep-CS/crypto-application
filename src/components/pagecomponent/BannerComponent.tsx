@@ -69,7 +69,7 @@ const BannerComponent: React.FC = () => {
               Cryptocurrency Prices By Market Cap
             </h2>
             <p className="text-xs sm:text-sm text-muted-foreground">
-              The global cryptocurrency market cap today is $ $
+              The global cryptocurrency market cap today is $
               {(globalMarketData.total_market_cap / 1e12).toFixed(2)} Trillion,
               a
               <span
