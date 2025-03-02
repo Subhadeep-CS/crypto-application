@@ -245,7 +245,11 @@ const CoinDetails: React.FC = () => {
           </Tabs>
         </div>
         <div>
-          <CoinChart />
+          <CoinChart
+            percentageData={
+              coinDetailsData?.market_data.market_cap_change_percentage_24h
+            }
+          />
         </div>
       </div>
     </div>

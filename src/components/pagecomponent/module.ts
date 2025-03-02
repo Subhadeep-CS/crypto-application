@@ -93,3 +93,10 @@ type CoinItem = {
     hoverTrigger:React.ReactNode | string;
     hoverContext:string;
   }
+
+  export interface PaginationComponentProps {
+    totalPages: number;
+    currentPage: number;
+    setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
+  }
+  

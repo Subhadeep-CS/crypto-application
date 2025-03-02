@@ -1,11 +1,10 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { fetchAllCoinList } from "../../services/api";
 import CoinMarketDataTable from "./CoinMarketDataTable";
 import CoinMarketCategoryNavBar from "./CoinMarketCategoryNavBar";
 import CustomizeFilterComponent from "./CustomizeFilterComponent";
 import { CustomiseDropdownChange } from "./module";
-import { useCoinListData } from "../../zustand/store";
 import PaginationComponent from "./PaginationComponent";
 import {
   Select,
@@ -15,13 +14,22 @@ import {
   SelectValue,
 } from "../ui/select";
 import { Label } from "../ui/label";
+import { PAGE_LIMIT } from "../../utils/constant";
+import { useGlobalMarketStore } from "../../zustand/store";
 
 const CoinMarketDataComponent: React.FC = () => {
-  const coinListPerPagedata = useCoinListData((state) => state.coinListPerPage);
+  const { globalMarketData } = useGlobalMarketStore();
+  const [selectRow, setSelectRow] = useState<string>(PAGE_LIMIT);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const totalPages = useMemo(
+    () =>
+      Math.floor(globalMarketData?.total_crypto_currencies / Number(selectRow)),
+    [globalMarketData, selectRow]
+  );
   const { data: coinList, isLoading } = useQuery({
     queryKey: [
       "CoinList",
-      { vs_currency: "usd", per_page: coinListPerPagedata },
+      { vs_currency: "usd", per_page: selectRow, page: currentPage },
     ],
     queryFn: fetchAllCoinList,
   });
@@ -33,6 +41,8 @@ const CoinMarketDataComponent: React.FC = () => {
       "Market Cap/FDV": false,
     }
   );
+
+  console.log("Total Pages", totalPages);
   if (isLoading) {
     return;
   }
@@ -51,18 +61,26 @@ const CoinMarketDataComponent: React.FC = () => {
           dropdownChange={dropdownChange}
         />
         <div className="w-full flex justify-between items-center">
-          <p className="whitespace-nowrap text-xs hidden sm:visible">
-            Show 1 to 100 of 16,388 results
+          <p className="whitespace-nowrap text-xs">
+            Show 1 to {selectRow} of {globalMarketData?.total_crypto_currencies}{" "}
+            results
           </p>
-          <PaginationComponent />
-          <div className="hidden sm:visible">
+          <PaginationComponent
+            totalPages={totalPages}
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+          />
+          <div className="flex">
             <Label
               htmlFor="rows"
-              className=" bg-secondary border mr-2 border-none text-muted-foreground focus:ring-0 focus:bg-secondary/80"
+              className="border mr-2 border-none text-muted-foreground flex justify-center items-center text-xs"
             >
               Rows:{" "}
             </Label>
-            <Select>
+            <Select
+              onValueChange={(value) => setSelectRow(value)}
+              value={selectRow}
+            >
               <SelectTrigger className="w-24 bg-secondary border mr-2 border-none focus:ring-0 focus:bg-secondary/80">
                 <SelectValue placeholder="50" />
               </SelectTrigger>

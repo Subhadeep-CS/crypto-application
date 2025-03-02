@@ -7,7 +7,9 @@ import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { formattedData } from "./module";
 
-const CoinChart: React.FC = () => {
+const CoinChart: React.FC<{ percentageData: number }> = ({
+  percentageData,
+}) => {
   const { coin_id } = useParams<{ coin_id: string }>();
   const [chartData, setChartData] = useState<formattedData[]>([]);
   const { data: coinChartsData } = useQuery({
@@ -18,7 +20,7 @@ const CoinChart: React.FC = () => {
   const chartConfig = {
     desktop: {
       label: "Desktop",
-      color: "#2563eb",
+      color: percentageData < 0 ? "#ef4444" : "#10b981",
     },
     mobile: {
       label: "Mobile",
@@ -54,8 +56,16 @@ const CoinChart: React.FC = () => {
         <AreaChart data={chartData}>
           <defs>
             <linearGradient id="colorPrice" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8} />
-              <stop offset="95%" stopColor="#8884d8" stopOpacity={0} />
+              <stop
+                offset="5%"
+                stopColor={percentageData < 0 ? "#ef4444" : "#10b981"}
+                stopOpacity={0.8}
+              />
+              <stop
+                offset="95%"
+                stopColor={percentageData < 0 ? "#ef4444" : "#10b981"}
+                stopOpacity={0}
+              />
             </linearGradient>
           </defs>
           <XAxis dataKey="time" tick={{ fontSize: 12 }} />
@@ -90,6 +100,9 @@ const CoinChart: React.FC = () => {
             dot={false}
             strokeWidth={2}
             fill="url(#colorPrice)"
+            stroke={
+              percentageData < 0 ? "rgb(239, 68, 68)" : "rgb(16, 185, 129)"
+            }
             fillOpacity={1}
           />
         </AreaChart>
