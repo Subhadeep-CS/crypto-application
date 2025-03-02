@@ -32,6 +32,7 @@ const CoinMarketDataComponent: React.FC = () => {
       { vs_currency: "usd", per_page: selectRow, page: currentPage },
     ],
     queryFn: fetchAllCoinList,
+    placeholderData: (previousData) => previousData,
   });
 
   const [dropdownChange, setDropdownChange] = useState<CustomiseDropdownChange>(

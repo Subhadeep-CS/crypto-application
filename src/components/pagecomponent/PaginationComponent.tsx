@@ -20,14 +20,11 @@ const PaginationComponent: React.FC<PaginationComponentProps> = ({
     window.scrollTo(0, 0);
   };
 
-  // Generate dynamic page numbers with ellipsis logic
   const getPageNumbers = () => {
     const pages = [];
     if (totalPages <= 5) {
-      // Show all pages if total is <= 5
       for (let i = 1; i <= totalPages; i++) pages.push(i);
     } else {
-      // Show first, last, and some in between
       pages.push(1);
       if (currentPage > 3) pages.push("...");
       for (
