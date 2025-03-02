@@ -9,20 +9,14 @@ import {
 import { navigationMenuTriggerStyle } from "../components/ui/navigation-menu";
 import TopHeader from "./TopHeader";
 import { HEADER_MENU } from "../utils/constant";
-import { useQuery } from "@tanstack/react-query";
-import { fetchGlobalCoinData } from "../services/api";
 import { useEffect } from "react";
 import { useGlobalMarketStore } from "../zustand/store";
+import { HeaderData } from "./module";
 
-const Header: React.FC = () => {
-  const {
-    data: topHeaderData,
-    isLoading,
-    status,
-  } = useQuery({
-    queryKey: ["globalCoinData"],
-    queryFn: fetchGlobalCoinData,
-  });
+const Header: React.FC<{
+  topHeaderData: HeaderData;
+  status: "success" | "pending" | "error";
+}> = ({ topHeaderData, status }) => {
   const setGlobalMarketData = useGlobalMarketStore(
     (state) => state.setGlobalMarketData
   );
@@ -39,9 +33,6 @@ const Header: React.FC = () => {
     }
   }, [status, topHeaderData]);
 
-  if (isLoading) {
-    return;
-  }
   return (
     <div className="w-full">
       <div className="border-b">

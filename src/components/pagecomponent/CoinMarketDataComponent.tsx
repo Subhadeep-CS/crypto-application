@@ -1,7 +1,6 @@
-import { useMemo, useState } from "react";
+import { lazy, useMemo, useState, Suspense } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { fetchAllCoinList } from "../../services/api";
-import CoinMarketDataTable from "./CoinMarketDataTable";
 import CoinMarketCategoryNavBar from "./CoinMarketCategoryNavBar";
 import CustomizeFilterComponent from "./CustomizeFilterComponent";
 import { CustomiseDropdownChange } from "./module";
@@ -16,6 +15,7 @@ import {
 import { Label } from "../ui/label";
 import { PAGE_LIMIT } from "../../utils/constant";
 import { useGlobalMarketStore } from "../../zustand/store";
+const CoinMarketDataTable = lazy(() => import("./CoinMarketDataTable"));
 
 const CoinMarketDataComponent: React.FC = () => {
   const { globalMarketData } = useGlobalMarketStore();
@@ -57,10 +57,12 @@ const CoinMarketDataComponent: React.FC = () => {
         />
       </div>
       <div className="container-all">
-        <CoinMarketDataTable
-          allCoinList={coinList}
-          dropdownChange={dropdownChange}
-        />
+        <Suspense fallback={<div>Loading...</div>}>
+          <CoinMarketDataTable
+            allCoinList={coinList}
+            dropdownChange={dropdownChange}
+          />
+        </Suspense>
         <div className="w-full flex justify-between items-center">
           <p className="whitespace-nowrap text-xs">
             Show 1 to {selectRow} of {globalMarketData?.total_crypto_currencies}{" "}
