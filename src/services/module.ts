@@ -3,5 +3,5 @@ export interface CoinListQueryKey{
 }
 
 export interface CoinDetailsQueryKey{
-    queryKey:[string,{coin_id:string | undefined}]
+    queryKey:[string,{coin_id:string | undefined,days:string | number}]
 }

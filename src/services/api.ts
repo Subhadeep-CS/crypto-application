@@ -1,4 +1,5 @@
-import { CoinDetailsQueryKey, CoinListQueryKey } from "./module";
+import { CoinListQueryKey } from "./module";
+import { QueryFunctionContext } from "@tanstack/react-query";
 
 // api/fetchGlobalCoin.ts
 export const fetchGlobalCoinData = async () => {
@@ -49,14 +50,40 @@ export const fetchGlobalCoinData = async () => {
     return response.json();
   }
 
-  export const fetchCoinDetails=async({queryKey}:CoinDetailsQueryKey)=>{
-    const [,{coin_id}]=queryKey;
-    const response=await fetch(`${import.meta.env.VITE_BASE_URL}/coins/${coin_id}`,{
+  export const fetchCoinDetails = async ({
+    queryKey,
+  }: QueryFunctionContext<[string, { coin_id: string | undefined; days: string }]>) => {
+    const [, { coin_id }] = queryKey; // Correctly extract coin_id
+  
+    if (!coin_id) {
+      throw new Error("coin_id is required to fetch coin details");
+    }
+  
+    const response = await fetch(
+      `${import.meta.env.VITE_BASE_URL}/coins/${coin_id}`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          "x-cg-demo-api-key": import.meta.env.VITE_API_KEY,
+        },
+      }
+    );
+  
+    if (!response.ok) {
+      throw new Error(`Failed to fetch coin details: ${response.statusText}`);
+    }
+  
+    return response.json();
+  };
+
+  export const fetchCoinChartData=async({queryKey}:QueryFunctionContext<[string, { coin_id: string | undefined; days: string }]>)=>{
+    const [,{coin_id,days}]=queryKey;
+    const response=await fetch(`${import.meta.env.VITE_BASE_URL}/coins/${coin_id}/market_chart?vs_currency=usd&days=${days}`,{
       headers:{
         'Content-Type':'application/json',
         "x-cg-demo-api-key": import.meta.env.VITE_API_KEY,
       }
-    });
+    })
 
     if(!response.ok){
       throw new Error(`Failed to fetch trending coins: ${response.statusText}`);
@@ -65,9 +92,8 @@ export const fetchGlobalCoinData = async () => {
     return response.json();
   }
 
-  export const fetchCoinChartData=async({queryKey}:CoinDetailsQueryKey)=>{
-    const [,{coin_id}]=queryKey;
-    const response=await fetch(`${import.meta.env.VITE_BASE_URL}/coins/${coin_id}/market_chart?vs_currency=usd&days=1`,{
+  export const fetchCoinCategoryList=async()=>{
+    const response=await fetch(`${import.meta.env.VITE_BASE_URL}/coins/categories/list`,{
       headers:{
         'Content-Type':'application/json',
         "x-cg-demo-api-key": import.meta.env.VITE_API_KEY,

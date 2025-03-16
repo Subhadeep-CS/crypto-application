@@ -4,7 +4,7 @@ import { fetchCoinDetails } from "../../services/api";
 import { Badge } from "../../components/ui/badge";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretDown, faCaretUp } from "@fortawesome/free-solid-svg-icons";
-import { Calendar, Info } from "lucide-react";
+import { Info } from "lucide-react";
 import HoverCardComponent from "../../components/pagecomponent/HoverCardCiomponent";
 import { Button } from "../../components/ui/button";
 import { faStar } from "@fortawesome/free-regular-svg-icons";
@@ -28,11 +28,14 @@ import {
 import BreadCrumbComponent from "../../components/pagecomponent/BreadCrumbComponent";
 import CoinDetailsTable from "./CoinDetailsTable";
 import CoinChart from "./CoinChart";
+import { useState } from "react";
 
 const CoinDetails: React.FC = () => {
+  const [selectedChartTime, setSelectedChartTime] = useState<string>("1");
+  const [priceType, setPriceType] = useState<string>("prices");
   const { coin_id } = useParams<{ coin_id: string }>();
   const { data: coinDetailsData, isLoading } = useQuery({
-    queryKey: ["CoinListData", { coin_id }],
+    queryKey: ["CoinListData", { coin_id, days: selectedChartTime }],
     queryFn: fetchCoinDetails,
   });
   if (isLoading) {
@@ -146,7 +149,9 @@ const CoinDetails: React.FC = () => {
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead className="font-bold text-xl">Info</TableHead>
+                <TableHead className="font-bold text-xl text-black">
+                  Info
+                </TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -212,45 +217,136 @@ const CoinDetails: React.FC = () => {
           </Table>
         </div>
       </div>
-      <div className="w-8/12">
+      <div className="w-8/12 space-y-8 p-4">
         <div
           id="naviogation-bar"
           className="flex justify-between items-center gap-2"
         >
-          <Tabs>
+          <Tabs value={priceType} onValueChange={setPriceType}>
             <TabsList>
-              <TabsTrigger value="">Price</TabsTrigger>
-              <TabsTrigger value="">Market Cap</TabsTrigger>
+              <TabsTrigger value="prices">Price</TabsTrigger>
+              <TabsTrigger value="market_caps">Market Cap</TabsTrigger>
             </TabsList>
           </Tabs>
-          <Tabs>
+          <Tabs value={selectedChartTime} onValueChange={setSelectedChartTime}>
             <TabsList>
-              <TabsTrigger value="">24h</TabsTrigger>
-              <TabsTrigger value="">7d</TabsTrigger>
-              <TabsTrigger value="">1m</TabsTrigger>
-              <TabsTrigger value="">3m</TabsTrigger>
-              <TabsTrigger value="">1y</TabsTrigger>
-              <TabsTrigger value="">Max</TabsTrigger>
-              <TabsTrigger value="">LOG</TabsTrigger>
-              <TabsTrigger value="">
-                <Calendar />
-              </TabsTrigger>
-              <TabsTrigger value="">
-                <Calendar />
-              </TabsTrigger>
-              <TabsTrigger value="">
-                <Calendar />
-              </TabsTrigger>
+              <TabsTrigger value="1">24h</TabsTrigger>
+              <TabsTrigger value="7">7d</TabsTrigger>
+              <TabsTrigger value="30">1m</TabsTrigger>
+              <TabsTrigger value="90">3m</TabsTrigger>
             </TabsList>
           </Tabs>
         </div>
-        <div>
-          <CoinChart
-            percentageData={
-              coinDetailsData?.market_data.market_cap_change_percentage_24h
-            }
-          />
-        </div>
+        <CoinChart
+          percentageData={
+            selectedChartTime === "1"
+              ? coinDetailsData?.market_data?.market_cap_change_percentage_24h
+              : coinDetailsData?.market_data?.[
+                  `price_change_percentage_${selectedChartTime}d_in_currency`
+                ]?.usd
+          }
+          priceType={priceType}
+          days={selectedChartTime}
+        />
+        <Table className="rounded-lg overflow-hidden border border-gray-200">
+          <TableHeader className="bg-gray-100">
+            <TableRow>
+              <TableHead className="first:rounded-tl-lg last:rounded-tr-lg text-center">
+                1h
+              </TableHead>
+              <TableHead className="text-center">24h</TableHead>
+              <TableHead className="text-center">7d</TableHead>
+              <TableHead className="text-center">14d</TableHead>
+              <TableHead className="text-center last:rounded-tr-lg">
+                30d
+              </TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            <TableRow>
+              <TableCell className="text-center">
+                <span>
+                  {coinDetailsData?.market_data
+                    .price_change_percentage_1h_in_currency.usd < 0 ? (
+                    <FontAwesomeIcon icon={faCaretDown} color="#ff0000" />
+                  ) : (
+                    <FontAwesomeIcon icon={faCaretUp} color="#00ff00" />
+                  )}{" "}
+                </span>
+                {Math.abs(
+                  coinDetailsData?.market_data?.price_change_percentage_1h_in_currency[
+                    "usd"
+                  ].toFixed(2)
+                )}{" "}
+                %
+              </TableCell>
+              <TableCell className="text-center">
+                <span>
+                  {coinDetailsData?.market_data
+                    .price_change_percentage_24h_in_currency.usd < 0 ? (
+                    <FontAwesomeIcon icon={faCaretDown} color="#ff0000" />
+                  ) : (
+                    <FontAwesomeIcon icon={faCaretUp} color="#00ff00" />
+                  )}{" "}
+                </span>
+                {Math.abs(
+                  coinDetailsData?.market_data?.price_change_percentage_24h_in_currency[
+                    "usd"
+                  ].toFixed(2)
+                )}{" "}
+                %
+              </TableCell>
+              <TableCell className="text-center">
+                <span>
+                  {coinDetailsData?.market_data
+                    .price_change_percentage_7d_in_currency.usd < 0 ? (
+                    <FontAwesomeIcon icon={faCaretDown} color="#ff0000" />
+                  ) : (
+                    <FontAwesomeIcon icon={faCaretUp} color="#00ff00" />
+                  )}{" "}
+                </span>
+                {Math.abs(
+                  coinDetailsData?.market_data?.price_change_percentage_7d_in_currency[
+                    "usd"
+                  ].toFixed(2)
+                )}{" "}
+                %
+              </TableCell>
+              <TableCell className="text-center">
+                <span>
+                  {coinDetailsData?.market_data
+                    .price_change_percentage_14d_in_currency.usd < 0 ? (
+                    <FontAwesomeIcon icon={faCaretDown} color="#ff0000" />
+                  ) : (
+                    <FontAwesomeIcon icon={faCaretUp} color="#00ff00" />
+                  )}{" "}
+                </span>
+                {Math.abs(
+                  coinDetailsData?.market_data?.price_change_percentage_14d_in_currency[
+                    "usd"
+                  ].toFixed(2)
+                )}{" "}
+                %
+              </TableCell>
+              <TableCell className="text-center last:rounded-bl-lg">
+                <span>
+                  {coinDetailsData?.market_data
+                    .price_change_percentage_30d_in_currency.usd < 0 ? (
+                    <FontAwesomeIcon icon={faCaretDown} color="#ff0000" />
+                  ) : (
+                    <FontAwesomeIcon icon={faCaretUp} color="#00ff00" />
+                  )}{" "}
+                </span>
+                {Math.abs(
+                  coinDetailsData?.market_data?.price_change_percentage_30d_in_currency[
+                    "usd"
+                  ].toFixed(2)
+                )}{" "}
+                %
+              </TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
       </div>
     </div>
   );

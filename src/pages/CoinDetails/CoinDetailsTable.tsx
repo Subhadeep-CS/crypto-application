@@ -36,12 +36,6 @@ const CoinDetailsTable: React.FC<CoinDeatilsDataProps> = ({
           </TableRow>
           <TableRow>
             <TableCell className="flex justify-between items-center">
-              <TableCell>24h Trading Vol</TableCell>
-              <TableCell className="font-semibold text-black"></TableCell>
-            </TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell className="flex justify-between items-center">
               <TableCell>Circulating Supply</TableCell>
               <TableCell className="font-semibold text-black">
                 {coinDetailsData?.market_data?.circulating_supply?.toLocaleString()}

@@ -29,7 +29,7 @@ const CoinMarketCategoryNavBar: React.FC = () => {
           <NavigationMenuLink className={navigationMenuTriggerStyle()}>
             <div className="flex justify-center items-center py-2 gap-2">
               <FontAwesomeIcon icon={faListOl} className="text-base" />
-              <span className="text-md font-bold">Highlights</span>
+              <span className="text-md font-bold">Categories</span>
             </div>
           </NavigationMenuLink>
         </NavigationMenuItem>

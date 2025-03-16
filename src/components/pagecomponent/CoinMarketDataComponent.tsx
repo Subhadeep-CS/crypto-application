@@ -63,7 +63,7 @@ const CoinMarketDataComponent: React.FC = () => {
             dropdownChange={dropdownChange}
           />
         </Suspense>
-        <div className="w-full flex justify-between items-center">
+        <div className="w-full flex justify-between items-center container-all">
           <p className="whitespace-nowrap text-xs">
             Show 1 to {selectRow} of {globalMarketData?.total_crypto_currencies}{" "}
             results
