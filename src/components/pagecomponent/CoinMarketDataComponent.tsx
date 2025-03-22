@@ -63,8 +63,8 @@ const CoinMarketDataComponent: React.FC = () => {
             dropdownChange={dropdownChange}
           />
         </Suspense>
-        <div className="w-full flex justify-between items-center container-all">
-          <p className="whitespace-nowrap text-xs">
+        <div className="flex justify-between items-cente flex-wrap">
+          <p className="whitespace-nowrap text-xs hidden sm:block">
             Show 1 to {selectRow} of {globalMarketData?.total_crypto_currencies}{" "}
             results
           </p>
@@ -73,7 +73,7 @@ const CoinMarketDataComponent: React.FC = () => {
             currentPage={currentPage}
             setCurrentPage={setCurrentPage}
           />
-          <div className="flex">
+          <div className="flex hidden sm:block">
             <Label
               htmlFor="rows"
               className="border mr-2 border-none text-muted-foreground flex justify-center items-center text-xs"

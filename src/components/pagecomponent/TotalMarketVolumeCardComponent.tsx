@@ -10,7 +10,7 @@ const TotalMarketVolumeCardComponent: React.FC<
 > = ({ cardTitle, cardDescription, cardDataChange = null }) => {
   return (
     <Card className="shadow-md bg-white rounded-lg">
-      <CardHeader className="flex flex-col sm:flex-row justify-between items-center text-xs sm:text-sm">
+      <CardHeader className="flex-row justify-between items-center text-xs sm:text-sm">
         <div className="flex-1">
           <CardTitle className="text-md sm:text-lg font-bold text-gray-800 mb-2">
             ${Math.round(cardTitle)}

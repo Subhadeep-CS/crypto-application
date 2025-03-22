@@ -63,7 +63,7 @@ const BannerComponent: React.FC = () => {
   return (
     <div className="container-all flex flex-col justify-center gap-8">
       <div className="flex flex-col gap-1.5">
-        <div className="mt-4 sm:mt-8 flex justify-between gap-1">
+        <div className="mt-4 sm:mt-8 flex flex-col sm:flex-row justify-between gap-1">
           <div>
             <h2 className="font-semibold text-md sm:text-xl">
               Cryptocurrency Prices By Market Cap
