@@ -13,6 +13,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretDown, faCaretUp } from "@fortawesome/free-solid-svg-icons";
 import SwitchComponent from "./SwitchComponent";
 import { Label } from "../ui/label";
+import HeaderShimmer from "../shimmer/HeaderShimmer";
 
 const BannerComponent: React.FC = () => {
   const {
@@ -58,8 +59,9 @@ const BannerComponent: React.FC = () => {
   }, [isSuccess]);
 
   if (isLoading) {
-    return;
+    return <HeaderShimmer />;
   }
+
   return (
     <div className="container-all flex flex-col justify-center gap-8">
       <div className="flex flex-col gap-1.5">

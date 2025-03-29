@@ -106,3 +106,18 @@ export const fetchGlobalCoinData = async () => {
 
     return response.json();
   }
+
+  export const fetchCoinCategoryDetails=async()=>{
+    const response=await fetch(`${import.meta.env.VITE_BASE_URL}coins/categories`,{
+      headers:{
+        'Content-Type':'application/json',
+        "x-cg-demo-api-key": import.meta.env.VITE_API_KEY,
+      }
+    })
+
+    if(!response.ok){
+      throw new Error(`Failed to fetch trending coins: ${response.statusText}`);
+    }
+
+    return response.json();
+  }

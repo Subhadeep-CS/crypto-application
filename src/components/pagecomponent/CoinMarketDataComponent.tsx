@@ -15,6 +15,7 @@ import {
 import { Label } from "../ui/label";
 import { PAGE_LIMIT } from "../../utils/constant";
 import { useGlobalMarketStore } from "../../zustand/store";
+import HeaderShimmer from "../shimmer/HeaderShimmer";
 const CoinMarketDataTable = lazy(() => import("./CoinMarketDataTable"));
 
 const CoinMarketDataComponent: React.FC = () => {
@@ -43,9 +44,8 @@ const CoinMarketDataComponent: React.FC = () => {
     }
   );
 
-  console.log("Total Pages", totalPages);
   if (isLoading) {
-    return;
+    return <HeaderShimmer />;
   }
   return (
     <div className="flex flex-col gap-2 my-4">

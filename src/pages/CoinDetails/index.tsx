@@ -42,8 +42,8 @@ const CoinDetails: React.FC = () => {
     return;
   }
   return (
-    <div className="container-all flex">
-      <div className="w-4/12 border-r pr-4" id="coin-details">
+    <div className="container-all flex flex-col sm:flex-row">
+      <div className="w-full sm:w-4/12 sm:border-r pr-4" id="coin-details">
         <div className="my-2">
           <BreadCrumbComponent />
         </div>
@@ -217,7 +217,7 @@ const CoinDetails: React.FC = () => {
           </Table>
         </div>
       </div>
-      <div className="w-8/12 space-y-8 p-4">
+      <div className=" w-full sm:w-8/12 space-y-8 p-4">
         <div
           id="naviogation-bar"
           className="flex justify-between items-center gap-2"
