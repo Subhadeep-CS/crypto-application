@@ -33,3 +33,11 @@ export const useCoinListData=create<{
   coinListPerPage:"50",
   setCoinListPerPage: (data)=>set(()=>({coinListPerPage:data}))
 }))
+
+export const useTrrendingCoinDeatils=create<{
+  trendingCoinData:{categories:GlobalCategoryData[],coins:{item:{name:string,coin_id:string}}[],nfts:{name:string}[]} | null
+  setTrendingCoinData:(data:{categories:GlobalCategoryData[],coins:{item:{name:string,coin_id:string}}[],nfts:{name:string}[]} | null)=>void
+}>((set)=>({
+  trendingCoinData:null,
+  setTrendingCoinData: (data)=> set(()=>({trendingCoinData:data}))
+}))

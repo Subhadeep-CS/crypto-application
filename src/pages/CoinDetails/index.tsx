@@ -38,6 +38,7 @@ const CoinDetails: React.FC = () => {
     queryKey: ["CoinListData", { coin_id, days: selectedChartTime }],
     queryFn: fetchCoinDetails,
   });
+
   if (isLoading) {
     return;
   }

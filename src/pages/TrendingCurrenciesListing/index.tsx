@@ -7,7 +7,6 @@ const TrendingCurrenciesListing: React.FC = () => {
     queryFn: fetchTrendingCoinData,
   });
 
-  console.log(trendingCoinData);
   if (isLoading) {
     return;
   }

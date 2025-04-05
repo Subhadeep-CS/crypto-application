@@ -12,6 +12,7 @@ import { HEADER_MENU } from "../utils/constant";
 import { useEffect } from "react";
 import { useGlobalMarketStore } from "../zustand/store";
 import { HeaderData } from "./module";
+import SearchComponent from "../components/common/SearchComponent";
 
 const Header: React.FC<{
   topHeaderData: HeaderData;
@@ -40,22 +41,24 @@ const Header: React.FC<{
       </div>
       <div className="border-b">
         <div className=" bg-white/80 backdrop-blur-lg container-all">
-          <nav className="flex justify-between items-center">
-            <Link to={"/"} className="flex justify-between items-center">
-              <div className="py-2">
-                <img
-                  src={Logo}
-                  className="w-32 h-10 sm:w-32 sm:h-10"
-                  alt="website-logo"
-                />
-              </div>
+          <div className="flex justify-between items-center">
+            <nav className="flex justify-between items-center">
+              <Link to={"/"} className="flex justify-between items-center">
+                <div className="py-2">
+                  <img
+                    src={Logo}
+                    className="w-32 h-10 sm:w-32 sm:h-10"
+                    alt="website-logo"
+                  />
+                </div>
+              </Link>
               <div className="px-2">
                 <NavigationMenu>
                   <NavigationMenuList>
                     {HEADER_MENU.map((headerMenu, index) => {
                       return (
                         <NavigationMenuItem key={index}>
-                          <Link to="/docs">
+                          <Link to="/">
                             <NavigationMenuLink
                               className={`${navigationMenuTriggerStyle()} text-xs sm:text-sm`}
                             >
@@ -68,8 +71,9 @@ const Header: React.FC<{
                   </NavigationMenuList>
                 </NavigationMenu>
               </div>
-            </Link>
-          </nav>
+            </nav>
+            <SearchComponent />
+          </div>
         </div>
       </div>
     </div>

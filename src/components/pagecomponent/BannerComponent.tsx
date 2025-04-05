@@ -8,6 +8,7 @@ import {
   useGlobalCategoryData,
   useGlobalMarketDominance,
   useGlobalMarketStore,
+  useTrrendingCoinDeatils,
 } from "../../zustand/store";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretDown, faCaretUp } from "@fortawesome/free-solid-svg-icons";
@@ -24,6 +25,7 @@ const BannerComponent: React.FC = () => {
     queryKey: ["TrendingData"],
     queryFn: fetchTrendingCoinData,
   });
+
   const globalMarketData = useGlobalMarketStore(
     (state) => state.globalMarketData
   );
@@ -33,6 +35,10 @@ const BannerComponent: React.FC = () => {
 
   const setGlobalCategoryData = useGlobalCategoryData(
     (state) => state.setGlobalCategoryData
+  );
+
+  const setTrendingCoinData = useTrrendingCoinDeatils(
+    (state) => state.setTrendingCoinData
   );
 
   const [readMore, setReadMore] = useState<boolean>(false);
@@ -51,12 +57,15 @@ const BannerComponent: React.FC = () => {
 
   useEffect(() => {
     if (isSuccess) {
+      setTrendingCoinData(trendingCoinData);
       const categoryData = trendingCoinData?.categories;
       if (categoryData) {
         setGlobalCategoryData(categoryData);
       }
     }
   }, [isSuccess]);
+
+  console.log(trendingCoinData);
 
   if (isLoading) {
     return <HeaderShimmer />;

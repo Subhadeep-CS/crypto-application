@@ -9,6 +9,7 @@ import {
 } from "../ui/navigation-menu";
 import { faListOl, faRankingStar } from "@fortawesome/free-solid-svg-icons";
 import { Separator } from "../ui/separator";
+import { Link } from "react-router-dom";
 const CoinMarketCategoryNavBar: React.FC = () => {
   const globalCategoryData = useGlobalCategoryData(
     (state) => state.globalCategoryData
@@ -27,10 +28,12 @@ const CoinMarketCategoryNavBar: React.FC = () => {
         </NavigationMenuItem>
         <NavigationMenuItem>
           <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-            <div className="flex justify-center items-center py-2 gap-2">
-              <FontAwesomeIcon icon={faListOl} className="text-base" />
-              <span className="text-md font-bold">Categories</span>
-            </div>
+            <Link to={"/categories"}>
+              <div className="flex justify-center items-center py-2 gap-2">
+                <FontAwesomeIcon icon={faListOl} className="text-base" />
+                <span className="text-md font-bold">Categories</span>
+              </div>
+            </Link>
           </NavigationMenuLink>
         </NavigationMenuItem>
         <Separator orientation="vertical" />

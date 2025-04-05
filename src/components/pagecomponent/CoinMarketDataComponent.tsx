@@ -73,7 +73,7 @@ const CoinMarketDataComponent: React.FC = () => {
             currentPage={currentPage}
             setCurrentPage={setCurrentPage}
           />
-          <div className="flex hidden sm:block">
+          <div className="hidden sm:flex">
             <Label
               htmlFor="rows"
               className="border mr-2 border-none text-muted-foreground flex justify-center items-center text-xs"
