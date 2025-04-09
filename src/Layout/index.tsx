@@ -4,6 +4,8 @@ import Footer from "../common/Footer";
 import { fetchGlobalCoinData } from "../services/api";
 import { useQuery } from "@tanstack/react-query";
 import BannerComponent from "../components/pagecomponent/BannerComponent";
+import HeaderShimmer from "../components/shimmer/HeaderShimmer";
+
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   const {
     data: topHeaderData,
@@ -15,7 +17,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   });
 
   if (isLoading) {
-    return;
+    return <HeaderShimmer />;
   }
   return (
     <>

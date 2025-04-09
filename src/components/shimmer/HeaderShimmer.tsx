@@ -1,15 +1,12 @@
-import { Skeleton } from "../ui/skeleton";
+import "./shimmer.css";
 const HeaderShimmer: React.FC = () => {
   return (
-    <div className="custom-container">
-      <div className="w-full grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <div className="w-full">
-          <Skeleton className="h-full w-full rounded-xl" />
-          <Skeleton className="h-full w-full rounded-xl" />
-        </div>
-        <Skeleton className="h-full w-full rounded-xl" />
-        <Skeleton className="h-full w-full rounded-xl" />
+    <div className="crypto-loader">
+      <div className="coin-wrapper">
+        <div className="coin3D"></div>
+        <div className="ring"></div>
       </div>
+      <h3 className="crypto-text">Loading crypto magic...</h3>
     </div>
   );
 };
