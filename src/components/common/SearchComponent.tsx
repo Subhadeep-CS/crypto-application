@@ -1,6 +1,6 @@
 // SearchPopover.tsx
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Input } from "../ui/input";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { Search } from "lucide-react";
@@ -13,19 +13,27 @@ import {
   navigationMenuTriggerStyle,
 } from "../ui/navigation-menu";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faListOl } from "@fortawesome/free-solid-svg-icons";
-import { faFire } from "@fortawesome/free-solid-svg-icons";
-import { faImage } from "@fortawesome/free-solid-svg-icons";
+import { faListOl, faFire, faImage } from "@fortawesome/free-solid-svg-icons";
+import useDebounce from "../../hooks/useDebounce";
+import { useQuery } from "@tanstack/react-query";
+import { fetchSearchData } from "../../services/api";
+import { Separator } from "../ui/separator";
 
 const recentSearches = ["Doge", "Shiba", "XRP"];
 
 const SearchComponent: React.FC = () => {
+  const [open, setOpen] = useState(false);
+  const [query, setQuery] = useState("");
+  const debounceSearchQuery = useDebounce(query, 500);
+  const { data, refetch, isFetching, isError, error } = useQuery({
+    queryKey: ["searchData", debounceSearchQuery],
+    queryFn: () => fetchSearchData(debounceSearchQuery),
+    enabled: false, // 🔥 disable auto-fetch
+    refetchOnWindowFocus: false,
+  });
   const trendingCoinData = useTrrendingCoinDeatils(
     (state) => state.trendingCoinData
   );
-
-  const [open, setOpen] = useState(false);
-  const [query, setQuery] = useState("");
 
   // Dummy suggestions - Replace with API or fuzzy match logic
   const allCoins = ["Bitcoin", "Ethereum", "Solana", "Ripple", "Cardano"];
@@ -35,6 +43,11 @@ const SearchComponent: React.FC = () => {
       )
     : [];
 
+  useEffect(() => {
+    if (debounceSearchQuery && debounceSearchQuery.trim() !== "") refetch();
+  }, [debounceSearchQuery]);
+
+  console.log("Crypto Data", data);
   if (!trendingCoinData) {
     return;
   }
@@ -62,6 +75,8 @@ const SearchComponent: React.FC = () => {
             onChange={(e) => setQuery(e.target.value)}
           />
         </div>
+        {isFetching && <p>Loading...</p>}
+        {isError && <p>Error: {(error as Error).message}</p>}
         <NavigationMenu>
           <NavigationMenuItem className={navigationMenuTriggerStyle()}>
             <NavigationMenuLink>
@@ -122,16 +137,52 @@ const SearchComponent: React.FC = () => {
               </div>
             </div>
             <div>
-              <p className="text-sm font-medium mb-2">Trending</p>
-              <div className="flex flex-wrap gap-2">
-                {trendingCoinData.coins.map((coin) => (
-                  <span
-                    key={coin?.item?.coin_id}
-                    className="bg-yellow-100 text-sm px-2 py-1 rounded-md cursor-pointer hover:bg-yellow-200"
-                  >
-                    {coin.item.name}
-                  </span>
-                ))}
+              <div className="space-y-2">
+                <div className="flex items-center justify-between w-full gap-2">
+                  <p className="text-xs text-gray-500">Trending Search 🔥 </p>
+                  <Separator className="flex-1" />
+                </div>
+                {trendingCoinData?.coins &&
+                  trendingCoinData.coins.slice(0, 6).map((coin) => (
+                    <div
+                      key={coin?.item?.coin_id}
+                      className="bg-yellow-100 text-sm px-2 py-1 rounded-md cursor-pointer hover:bg-yellow-200"
+                    >
+                      {coin.item.name}
+                    </div>
+                  ))}
+              </div>
+              <div className="space-y-2">
+                <div className="flex items-center justify-between w-full gap-2">
+                  <p className="text-xs text-gray-500">Trending Nfts 🔥 </p>
+                  <Separator className="flex-1" />
+                </div>
+                {trendingCoinData?.nfts &&
+                  trendingCoinData.nfts.map((nft) => (
+                    <div
+                      key={nft.id}
+                      className="bg-yellow-100 text-sm px-2 py-1 rounded-md cursor-pointer hover:bg-yellow-200"
+                    >
+                      {nft.name}
+                    </div>
+                  ))}
+              </div>
+              <div className="space-y-2">
+                <div className="flex items-center justify-between w-full gap-2">
+                  <p className="text-xs text-gray-500">
+                    Trending Categories 🔥{" "}
+                  </p>
+                  <Separator className="flex-1" />
+                </div>
+                {trendingCoinData?.coins &&
+                  trendingCoinData.coins.map((coin) => (
+                    <div
+                      key={coin?.item?.coin_id}
+                      className="bg-yellow-100 text-sm px-2 py-1 rounded-md cursor-pointer hover:bg-yellow-200"
+                    >
+                      {coin.item.name}
+                    </div>
+                  ))}
               </div>
             </div>
           </>

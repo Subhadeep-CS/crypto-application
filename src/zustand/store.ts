@@ -35,8 +35,8 @@ export const useCoinListData=create<{
 }))
 
 export const useTrrendingCoinDeatils=create<{
-  trendingCoinData:{categories:GlobalCategoryData[],coins:{item:{name:string,coin_id:string}}[],nfts:{name:string}[]} | null
-  setTrendingCoinData:(data:{categories:GlobalCategoryData[],coins:{item:{name:string,coin_id:string}}[],nfts:{name:string}[]} | null)=>void
+  trendingCoinData:{categories:GlobalCategoryData[],coins:{item:{name:string,coin_id:string}}[],nfts:{name:string,id:string}[]} | null
+  setTrendingCoinData:(data:{categories:GlobalCategoryData[],coins:{item:{name:string,coin_id:string}}[],nfts:{id:string,name:string}[]} | null)=>void
 }>((set)=>({
   trendingCoinData:null,
   setTrendingCoinData: (data)=> set(()=>({trendingCoinData:data}))
