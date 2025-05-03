@@ -4,9 +4,11 @@ import Footer from "../common/Footer";
 import { fetchGlobalCoinData } from "../services/api";
 import { useQuery } from "@tanstack/react-query";
 import BannerComponent from "../components/pagecomponent/BannerComponent";
-import HeaderShimmer from "../components/shimmer/HeaderShimmer";
+import { useLocation } from "react-router-dom";
+import HeaderSkeleton from "../components/shimmer/HeaderSketeon";
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
+  const location = useLocation();
   const {
     data: topHeaderData,
     isLoading,
@@ -16,13 +18,14 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     queryFn: fetchGlobalCoinData,
   });
 
-  if (isLoading) {
-    return <HeaderShimmer />;
-  }
   return (
     <>
-      <Header topHeaderData={topHeaderData} status={status} />
-      <BannerComponent />
+      {isLoading ? (
+        <HeaderSkeleton />
+      ) : (
+        <Header topHeaderData={topHeaderData} status={status} />
+      )}
+      {["/", "/categories"].includes(location.pathname) && <BannerComponent />}
       <main>{children}</main>
       <Footer />
     </>

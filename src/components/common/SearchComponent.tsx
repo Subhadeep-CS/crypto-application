@@ -28,20 +28,12 @@ const SearchComponent: React.FC = () => {
   const { data, refetch, isFetching, isError, error } = useQuery({
     queryKey: ["searchData", debounceSearchQuery],
     queryFn: () => fetchSearchData(debounceSearchQuery),
-    enabled: false, // 🔥 disable auto-fetch
+    enabled: false,
     refetchOnWindowFocus: false,
   });
   const trendingCoinData = useTrrendingCoinDeatils(
     (state) => state.trendingCoinData
   );
-
-  // Dummy suggestions - Replace with API or fuzzy match logic
-  const allCoins = ["Bitcoin", "Ethereum", "Solana", "Ripple", "Cardano"];
-  const filteredSuggestions = query
-    ? allCoins.filter((coin) =>
-        coin.toLowerCase().includes(query.toLowerCase())
-      )
-    : [];
 
   useEffect(() => {
     if (debounceSearchQuery && debounceSearchQuery.trim() !== "") refetch();
@@ -64,7 +56,7 @@ const SearchComponent: React.FC = () => {
           <span className="text-sm text-gray-400 font-semibold">Search</span>
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-min p-4">
+      <PopoverContent className="w-[400px] p-4 right-0">
         <div className="relative mb-4">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
           <Input
@@ -106,23 +98,58 @@ const SearchComponent: React.FC = () => {
         {query ? (
           <div>
             <p className="text-sm font-medium mb-2">Suggestions</p>
-            <ul className="space-y-1">
-              {filteredSuggestions.length > 0 ? (
-                filteredSuggestions.map((coin, i) => (
-                  <li
-                    key={i}
-                    className="text-sm px-2 py-1 rounded-md hover:bg-gray-100 cursor-pointer"
-                  >
-                    {coin}
-                  </li>
-                ))
-              ) : (
-                <li className="text-sm text-muted-foreground">No results</li>
-              )}
-            </ul>
+            <div className="overflow-y-scroll h-96">
+              <div className="space-y-2">
+                <div className="flex items-center justify-between w-full gap-2">
+                  <p className="text-xs text-gray-500">Trending Search 🔥 </p>
+                  <Separator className="flex-1" />
+                </div>
+                {data?.coins &&
+                  data.coins.slice(0, 6).map((coin) => (
+                    <div
+                      key={coin?.coin_id}
+                      className="text-sm px-2 py-1 rounded-md cursor-pointer hover:bg-blue-100"
+                    >
+                      {coin.name}
+                    </div>
+                  ))}
+              </div>
+              <div className="space-y-2">
+                <div className="flex items-center justify-between w-full gap-2">
+                  <p className="text-xs text-gray-500">Trending Nfts 🔥 </p>
+                  <Separator className="flex-1" />
+                </div>
+                {data?.nfts &&
+                  data.nfts.map((nft) => (
+                    <div
+                      key={nft.id}
+                      className="bg-yellow-100 text-sm px-2 py-1 rounded-md cursor-pointer hover:bg-yellow-200"
+                    >
+                      {nft.name}
+                    </div>
+                  ))}
+              </div>
+              <div className="space-y-2">
+                <div className="flex items-center justify-between w-full gap-2">
+                  <p className="text-xs text-gray-500">
+                    Trending Categories 🔥{" "}
+                  </p>
+                  <Separator className="flex-1" />
+                </div>
+                {data?.coins &&
+                  data.coins.map((coin) => (
+                    <div
+                      key={coin?.coin_id}
+                      className="bg-yellow-100 text-sm px-2 py-1 rounded-md cursor-pointer hover:bg-yellow-200"
+                    >
+                      {coin.name}
+                    </div>
+                  ))}
+              </div>
+            </div>
           </div>
         ) : (
-          <>
+          <div className="max-h-96 overflow-y-scroll">
             <div className="mb-4">
               <p className="text-sm font-medium mb-2">Recent Searches</p>
               <div className="flex flex-wrap gap-2">
@@ -185,7 +212,7 @@ const SearchComponent: React.FC = () => {
                   ))}
               </div>
             </div>
-          </>
+          </div>
         )}
       </PopoverContent>
     </Popover>

@@ -67,10 +67,6 @@ const BannerComponent: React.FC = () => {
 
   console.log(trendingCoinData);
 
-  if (isLoading) {
-    return <HeaderShimmer />;
-  }
-
   return (
     <div className="container-all flex flex-col justify-center gap-8">
       <div className="flex flex-col gap-1.5">
@@ -157,7 +153,9 @@ const BannerComponent: React.FC = () => {
           </div>
         </div>
       </div>
-      {highlights && (
+      {isLoading || !highlights ? (
+        <HeaderShimmer />
+      ) : (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
           <TotalMarketCapData />
           <TrendingComponent trendingCoinData={trendingCoinData?.coins} />

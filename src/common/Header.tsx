@@ -5,8 +5,8 @@ import {
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
+  navigationMenuTriggerStyle,
 } from "../components/ui/navigation-menu";
-import { navigationMenuTriggerStyle } from "../components/ui/navigation-menu";
 import TopHeader from "./TopHeader";
 import { HEADER_MENU } from "../utils/constant";
 import { useEffect } from "react";

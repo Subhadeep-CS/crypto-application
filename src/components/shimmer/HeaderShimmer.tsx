@@ -1,12 +1,16 @@
-import "./shimmer.css";
+import CardShimmer from "./CardShimmer";
+
 const HeaderShimmer: React.FC = () => {
   return (
-    <div className="crypto-loader">
-      <div className="coin-wrapper">
-        <div className="coin3D"></div>
-        <div className="ring"></div>
+    <div className="container-all gap-2">
+      <div className="grid grid-cols-3 gap-2">
+        <div className="flex gap-2 flex-col">
+          <CardShimmer className="h-16" />
+          <CardShimmer className="h-16" />
+        </div>
+        <CardShimmer className="h-32" />
+        <CardShimmer className="h-32" />
       </div>
-      <h3 className="crypto-text">Loading crypto magic...</h3>
     </div>
   );
 };
