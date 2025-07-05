@@ -49,7 +49,7 @@ const SearchComponent: React.FC = () => {
       <PopoverTrigger asChild>
         <Button
           variant="secondary"
-          className="flex items-center justify-start gap-2 w-full max-w-52 "
+          className="flex items-center justify-start gap-2 w-full max-w-56"
           onClick={() => setOpen(!open)}
         >
           <Search className="h-4 w-4" />
@@ -105,7 +105,7 @@ const SearchComponent: React.FC = () => {
                   <Separator className="flex-1" />
                 </div>
                 {data?.coins &&
-                  data.coins.slice(0, 6).map((coin) => (
+                  data.coins.slice(0, 6).map((coin: unknown) => (
                     <div
                       key={coin?.coin_id}
                       className="text-sm px-2 py-1 rounded-md cursor-pointer hover:bg-blue-100"
@@ -120,7 +120,7 @@ const SearchComponent: React.FC = () => {
                   <Separator className="flex-1" />
                 </div>
                 {data?.nfts &&
-                  data.nfts.map((nft) => (
+                  data.nfts.map((nft: unknown) => (
                     <div
                       key={nft.id}
                       className="bg-yellow-100 text-sm px-2 py-1 rounded-md cursor-pointer hover:bg-yellow-200"

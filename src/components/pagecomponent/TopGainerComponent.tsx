@@ -25,17 +25,15 @@ const TopGainerComponent: React.FC<TopGainerComponentProps> = ({
             key={coinData?.nft_contract_id}
             className="flex justify-between items-center gap-4"
           >
-            <div className="flex justify-center items-center gap-2">
-              <div className="my-2">
-                <img
-                  src={coinData?.thumb}
-                  alt={coinData?.id}
-                  className="h-6 w-6 rounded-full"
-                />
-              </div>
+            <div className="flex justify-start items-center gap-2 w-40">
+              <img
+                src={coinData?.thumb}
+                alt={coinData?.id}
+                className="h-6 w-6 rounded-full"
+              />
               <span className="text-sm">{coinData?.name}</span>
             </div>
-            <div className="flex justify-center items-center gap-2">
+            <div className="flex justify-end items-center gap-2 w-40">
               <span className="text-sm">{coinData?.data?.floor_price}</span>
               <span className="text-sm">
                 {coinData?.data?.floor_price_in_usd_24h_percentage_change <

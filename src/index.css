@@ -89,3 +89,29 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Custom reusable button classes */
+.primary-button {
+  @apply relative bg-[#35af00]/60 rounded-md p-0 cursor-pointer outline-offset-4;
+}
+
+.primary-button .front {
+  @apply block px-2 py-1 rounded-md text-xs bg-[#35af00] text-white transform -translate-y-1.5 transition-transform duration-100;
+}
+
+.primary-button:active .front {
+  @apply translate-y-0.5;
+}
+
+/* Secondary button */
+.secondary-button {
+  @apply relative bg-slate-200 rounded-md p-0 cursor-pointer outline-offset-4;
+}
+
+.secondary-button .front {
+  @apply block px-2 py-1 rounded-md text-xs bg-white text-black transform -translate-y-1.5 transition-transform duration-100;
+}
+
+.secondary-button:active .front {
+  @apply translate-y-0.5;
+}

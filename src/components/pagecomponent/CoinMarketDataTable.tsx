@@ -31,7 +31,6 @@ const CoinMarketDataTable: React.FC<CoinMarketDataTableProps> = ({
             const shouldRenderHeader =
               !["30d", "FDV", "Market Cap/FDV"].includes(coinTableHeader) ||
               dropdownChange[coinTableHeader as keyof CustomiseDropdownChange];
-
             return shouldRenderHeader ? (
               <TableHead
                 key={`${coinTableHeader}-${index}`}

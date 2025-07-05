@@ -35,6 +35,8 @@ export default {
       colors: {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
+        pushable: "hsl(340,100%,32%)",
+        front: "hsl(345,100%,47%)",
         card: {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",

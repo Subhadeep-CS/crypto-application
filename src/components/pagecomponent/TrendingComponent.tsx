@@ -27,9 +27,9 @@ const TrendingComponent: React.FC<TrendingComponentProps> = ({
           {trendingCoinData.slice(0, 3).map((coinData) => (
             <div
               key={coinData?.item?.coin_id}
-              className="flex justify-between items-center gap-4"
+              className="flex justify-between items-center"
             >
-              <div className="flex justify-center items-center gap-2">
+              <div className="flex justify-start items-center gap-2 w-32">
                 <div className="my-2">
                   <img
                     src={coinData?.item?.thumb}
@@ -39,11 +39,11 @@ const TrendingComponent: React.FC<TrendingComponentProps> = ({
                 </div>
                 <span className="text-sm">{coinData?.item?.name}</span>
               </div>
-              <div className="flex justify-center items-center gap-4">
+              <div className="flex justify-end items-center gap-4 w-40">
                 <span className="text-sm">
                   ${coinData?.item?.data?.price.toFixed(3)}
                 </span>
-                <div className={`flex justify-center items-center gap-1`}>
+                <div className={`flex justify-start items-center gap-1`}>
                   <span>
                     {coinData?.item?.data?.price_change_percentage_24h["usd"] >
                     0 ? (

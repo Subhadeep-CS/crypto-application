@@ -7,8 +7,8 @@ import {
 } from "./module";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretDown, faCaretUp } from "@fortawesome/free-solid-svg-icons";
-import { Button } from "../components/ui/button";
-import { Settings, User } from "lucide-react";
+// import { Button } from "../components/ui/button";
+// import { Settings, User } from "lucide-react";
 import {
   useGlobalMarketDominance,
   useGlobalMarketStore,
@@ -112,16 +112,22 @@ const TopHeader: React.FC<TopHeaderPropsData> = ({ topHeaderData }) => {
         id="logindata"
         className="justify-end items-center gap-4 p-2 hidden sm:flex"
       >
-        <div id="settings-button">
-          <Button variant={"secondary"}>
+        <div id="settings-button" className="space-x-2">
+          <button className="secondary-button">
+            <span className="front">Log in</span>
+          </button>
+          <button className="primary-button">
+            <span className="front">Sign Up</span>
+          </button>
+          {/* <Button variant={"secondary"}>
             <Settings />
-          </Button>
+          </Button> */}
         </div>
-        <div id="login-button">
+        {/* <div id="login-button">
           <Button variant={"secondary"}>
             <User />
           </Button>
-        </div>
+        </div> */}
       </div>
     </div>
   );

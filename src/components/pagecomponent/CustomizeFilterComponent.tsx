@@ -1,5 +1,4 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Button } from "../ui/button";
 import { faFilter } from "@fortawesome/free-solid-svg-icons";
 import CustomiseDropdownComponent from "./CustomiseDropdownComponent";
 import { CustomiseFilterProps } from "./module";
@@ -13,9 +12,12 @@ const CustomizeFilterComponent: React.FC<CustomiseFilterProps> = ({
         dropdownChange={dropdownChange}
         setDropdownChange={setDropdownChange}
       />
-      <Button variant={"secondary"}>
-        <FontAwesomeIcon icon={faFilter} />
-      </Button>
+      <button className="secondary-button">
+        <span className="front">
+          <FontAwesomeIcon icon={faFilter} />
+        </span>
+      </button>
+      {/* <Button variant={"secondary"}></Button> */}
     </div>
   );
 };
